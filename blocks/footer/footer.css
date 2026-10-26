@@ -1,20 +1,39 @@
 footer {
-  background-color: var(--light-color);
+  border-top: 4px solid var(--accent-color);
+  background-color: var(--color-purple-900);
+  color: var(--color-purple-100);
   font-size: var(--body-font-size-xs);
 }
 
 footer .footer > div {
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  max-width: var(--content-max-width);
+  padding: 48px 24px 32px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+footer .footer p + p {
+  margin-top: 12px;
+}
+
+footer .footer a:any-link {
+  color: var(--background-color);
+  font-weight: 400;
+}
+
+footer .footer a:hover {
+  color: var(--color-pink-500);
+}
+
+footer .footer :focus-visible {
+  outline-color: var(--color-pink-500);
+}
+
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 40px 32px 24px;
+    padding: 48px 32px 32px;
   }
 }

@@ -1,10 +1,17 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  gap: 24px;
+}
+
+.columns > div + div {
+  margin-top: 48px;
 }
 
 .columns img {
   width: 100%;
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-m);
 }
 
 .columns > div > div {
@@ -23,7 +30,7 @@
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: 64px;
   }
 
   .columns > div > div {
