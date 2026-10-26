@@ -11,33 +11,62 @@
  */
 
 :root {
+  /* palette */
+  --color-purple-50: #faf5ff;
+  --color-purple-100: #f3e8ff;
+  --color-purple-600: #7c3aed;
+  --color-purple-700: #6d28d9;
+  --color-purple-900: #3b0764;
+  --color-pink-500: #ec4899;
+  --color-pink-600: #db2777;
+  --color-gray-500: #6b6580;
+  --color-gray-900: #1e1b2e;
+
   /* colors */
-  --background-color: rgb(182, 30, 164);
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --background-color: #fff;
+  --light-color: var(--color-purple-50);
+  --dark-color: var(--color-gray-500);
+  --text-color: var(--color-gray-900);
+  --accent-color: var(--color-purple-600);
+  --accent-hover-color: var(--color-purple-700);
+  --highlight-color: var(--color-pink-600);
+  --link-color: var(--color-purple-600);
+  --link-hover-color: var(--color-pink-600);
+  --border-color: color-mix(in oklab, var(--color-purple-600) 15%, transparent);
+  --accent-gradient: linear-gradient(135deg, var(--color-purple-600), var(--color-pink-600));
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --heading-font-family: roboto, roboto-fallback, sans-serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --body-font-size-s: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+  --body-font-size-xs: 0.875rem;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: clamp(2.5rem, 1.75rem + 3vw, 4rem);
+  --heading-font-size-xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --heading-font-size-l: clamp(1.625rem, 1.3rem + 1.25vw, 2.25rem);
+  --heading-font-size-m: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  --heading-font-size-s: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --heading-font-size-xs: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+
+  /* shapes and depth */
+  --radius-s: 8px;
+  --radius-m: 16px;
+  --radius-pill: 999px;
+  --shadow-s: 0 1px 2px rgb(59 7 100 / 6%), 0 2px 8px rgb(59 7 100 / 6%);
+  --shadow-m: 0 4px 12px rgb(59 7 100 / 8%), 0 12px 32px rgb(59 7 100 / 10%);
+
+  /* spacing */
+  --section-spacing: clamp(48px, 6vw, 96px);
+  --content-max-width: 1200px;
 
   /* nav height */
   --nav-height: 64px;
+
+  accent-color: var(--accent-color);
 }
 
 /* fallback fonts */
@@ -53,23 +82,6 @@
   src: local('Arial');
 }
 
-@media (width >= 900px) {
-  :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
-  }
-}
-
 body {
   display: none;
   margin: 0;
@@ -77,11 +89,17 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.appear {
   display: block;
+}
+
+::selection {
+  background-color: var(--color-pink-500);
+  color: var(--background-color);
 }
 
 header {
@@ -104,15 +122,21 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 1em;
+  margin-bottom: 0.4em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  letter-spacing: -0.03em;
+}
+
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
@@ -125,8 +149,14 @@ ol,
 ul,
 pre,
 blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+p,
+li,
+blockquote {
+  text-wrap: pretty;
 }
 
 code,
@@ -136,7 +166,7 @@ pre {
 
 pre {
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--radius-s);
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
@@ -156,18 +186,27 @@ button {
 /* links */
 a:any-link {
   color: var(--link-color);
+  font-weight: 500;
   text-decoration: none;
   overflow-wrap: break-word;
+  transition: color 0.2s ease;
 }
 
 a:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
 }
 
 /* buttons */
 p.button-wrapper {
-  margin: 12px 0;
+  margin: 16px 0;
 }
 
 a.button:any-link,
@@ -177,11 +216,13 @@ button.button {
   align-items: center;
   justify-content: center;
   max-width: 100%;
+  min-block-size: 48px;
   margin: 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border-radius: var(--radius-pill);
+  padding: 0.6em 1.6em;
   font: inherit;
+  font-size: var(--body-font-size-s);
   font-weight: 500;
   line-height: 1.25;
   text-decoration: none;
@@ -189,6 +230,7 @@ button.button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, translate 0.2s ease;
 }
 
 a.button[aria-disabled="true"],
@@ -199,18 +241,20 @@ button.button:disabled {
 
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
   color: var(--background-color);
+  box-shadow: var(--shadow-s);
 }
 
 a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  border-color: var(--accent-hover-color);
+  background-color: var(--accent-hover-color);
+  color: var(--background-color);
+  box-shadow: var(--shadow-m);
 }
 
 a.button.primary[aria-disabled="true"],
@@ -222,22 +266,23 @@ button.button.primary:disabled:focus-visible {
   background-color: var(--light-color);
   border-color: var(--light-color);
   color: var(--dark-color);
+  box-shadow: none;
 }
 
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
+  border-color: var(--accent-color);
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--accent-color);
 }
 
 a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--light-color);
-  color: var(--dark-color);
+  border-color: var(--accent-hover-color);
+  background-color: var(--color-purple-100);
+  color: var(--accent-hover-color);
 }
 
 a.button.secondary[aria-disabled="true"],
@@ -254,17 +299,19 @@ button.button.secondary:disabled:focus-visible {
 /* high-impact call-to-action */
 a.button.accent,
 button.button.accent {
-  border-color: var(--link-color);
-  background-color: var(--link-color);
+  border-color: transparent;
+  background-color: var(--highlight-color);
+  background-image: var(--accent-gradient);
   color: var(--background-color);
+  box-shadow: var(--shadow-m);
 }
 
 a.button.accent:hover,
 a.button.accent:focus-visible,
 button.button.accent:hover,
 button.button.accent:focus-visible {
-  border-color: var(--link-hover-color);
-  background-color: var(--link-hover-color);
+  color: var(--background-color);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--color-pink-500) 35%, transparent);
 }
 
 a.button.accent[aria-disabled="true"],
@@ -274,8 +321,17 @@ button.button.accent:disabled,
 button.button.accent:disabled:hover,
 button.button.accent:disabled:focus-visible {
   background-color: var(--light-color);
+  background-image: none;
   border-color: var(--light-color);
   color: var(--dark-color);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a.button:any-link:hover:not([aria-disabled="true"]),
+  button.button:hover:not(:disabled) {
+    translate: 0 -2px;
+  }
 }
 
 main img {
@@ -295,13 +351,17 @@ main img {
   width: 100%;
 }
 
+main .default-content-wrapper picture:not(.icon *) img {
+  border-radius: var(--radius-m);
+}
+
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: var(--section-spacing) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--content-max-width);
   margin: auto;
   padding: 0 24px;
 }
@@ -321,5 +381,12 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--section-spacing) 0;
+}
+
+@media (forced-colors: active) {
+  a.button.accent,
+  button.button.accent {
+    border-color: ButtonText;
+  }
 }

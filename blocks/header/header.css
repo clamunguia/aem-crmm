@@ -1,9 +1,15 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: color-mix(in oklab, var(--background-color) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
   width: 100%;
   z-index: 2;
   position: fixed;
+}
+
+header .nav-wrapper:has(nav[aria-expanded='true']) {
+  background-color: var(--background-color);
 }
 
 header nav {
@@ -53,6 +59,11 @@ header nav a:any-link {
   color: currentcolor;
 }
 
+header nav a:any-link:hover {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+
 /* hamburger */
 header nav .nav-hamburger {
   grid-area: hamburger;
@@ -67,7 +78,7 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   color: inherit;
   overflow: initial;
   text-overflow: initial;
@@ -141,6 +152,19 @@ header .nav-brand {
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+header nav .nav-brand a:any-link {
+  background-image: var(--accent-gradient);
+  background-clip: text;
+  color: transparent;
+}
+
+@media (forced-colors: active) {
+  header nav .nav-brand a:any-link {
+    color: LinkText;
+  }
 }
 
 header nav .nav-brand img {
@@ -199,8 +223,12 @@ header nav .nav-sections .nav-drop > button[aria-expanded='true']::after {
   transform: rotate(315deg);
 }
 
+header nav .nav-sections .nav-drop > button:hover {
+  color: var(--link-hover-color);
+}
+
 header nav .nav-sections .nav-drop > button:focus-visible {
-  outline: 2px solid currentcolor;
+  outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
 
@@ -243,10 +271,13 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
     display: block;
     position: absolute;
     left: -24px;
-    width: 200px;
+    width: 220px;
     top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
+    padding: 12px 24px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-m);
+    background-color: var(--background-color);
+    box-shadow: var(--shadow-m);
     white-space: initial;
   }
 
@@ -259,7 +290,7 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    border-bottom: 8px solid var(--background-color);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
