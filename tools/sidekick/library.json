@@ -3,8 +3,8 @@
   ":type": "multi-sheet",
   "blocks": {
     "data": [
-      { "name": "Hero", "path": "/blocks/hero", "description": "Banner principal con imagen y texto" },
-      { "name": "Cards", "path": "/blocks/cards", "description": "Tarjetas en cuadrícula" }
+      { "name": "Hero", "path": "/tools/sidekick/blocks/hero", "description": "Banner principal con imagen y texto" },
+      { "name": "Cards", "path": "/tools/sidekick/blocks/cards", "description": "Tarjetas en cuadrícula" }
     ]
   }
 }
