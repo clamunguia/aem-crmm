@@ -1,0 +1,22 @@
+{
+  "variantName": "author-bio",
+  "baseBlock": "custom",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + text + button",
+    "purpose": "Blog author name and bio with a share button"
+  },
+  "contentPattern": {
+    "structure": "optional portrait | author name (heading) + bio text"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_20fb9b04f3a6"
+  ],
+  "usage": "Use for: blog author name and bio with a share button (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

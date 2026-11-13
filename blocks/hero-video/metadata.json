@@ -1,0 +1,28 @@
+{
+  "variantName": "hero-video",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "image + video + button + heading + link",
+    "purpose": "Full-bleed hero with background video or photo, headline and CTA"
+  },
+  "contentPattern": {
+    "structure": "one row: poster image + video file link | headline, text, CTA"
+  },
+  "options": [
+    {
+      "class": "green",
+      "label": "Green"
+    }
+  ],
+  "memberVariantIds": [
+    "v_b6ffc9c7294d",
+    "v_b6ffc9c7294d-1"
+  ],
+  "usage": "Use for: full-bleed hero with background video or photo, headline and cta (jameshardie.com).",
+  "reuseGuidance": "Add an option class (green) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

@@ -1,0 +1,93 @@
+.cards-article .cards-article-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.cards-article .cards-article-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cards-article .cards-article-card-image {
+  line-height: 0;
+}
+
+.cards-article .cards-article-card-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.cards-article .cards-article-card-icon {
+  line-height: 0;
+}
+
+.cards-article .cards-article-card-icon img,
+.cards-article .cards-article-card-icon .icon {
+  width: 48px;
+  height: 48px;
+}
+
+.cards-article .cards-article-card-body {
+  flex: 1;
+  padding: 16px;
+}
+
+.cards-article .cards-article-card-body > :first-child {
+  margin-top: 0;
+}
+
+.cards-article .cards-article-card-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* whole card clickable when it has a single link */
+.cards-article .cards-article-card-linked .cards-article-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+/* featured: first card spans two columns and rows */
+@media (width >= 900px) {
+  .cards-article.featured .cards-article-list {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .cards-article.featured .cards-article-card-featured {
+    grid-row: span 2;
+  }
+}
+
+/* icon tiles */
+.cards-article.icon .cards-article-card,
+.cards-article.icon-2 .cards-article-card,
+.cards-article.icon-alt .cards-article-card {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+}
+
+.cards-article.icon .cards-article-card-body,
+.cards-article.icon-2 .cards-article-card-body,
+.cards-article.icon-alt .cards-article-card-body {
+  padding: 0;
+}
+
+/* buttons: links as a row of pills */
+.cards-article.buttons .cards-article-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cards-article.buttons .cards-article-card-body {
+  padding: 0;
+}

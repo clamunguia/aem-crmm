@@ -1,0 +1,33 @@
+{
+  "variantName": "cards-video",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "video + button + heading + text",
+    "purpose": "Video cards with title and description"
+  },
+  "contentPattern": {
+    "structure": "one row per card: poster image + video link | title, text, optional link"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    },
+    {
+      "class": "caption-overlay",
+      "label": "Caption Overlay"
+    }
+  ],
+  "memberVariantIds": [
+    "v_655e7fe2644a",
+    "v_d507b48d63c9",
+    "v_111c94cbd91f-6"
+  ],
+  "usage": "Use for: video cards with title and description (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt, caption-overlay) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

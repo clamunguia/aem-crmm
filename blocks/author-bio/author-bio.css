@@ -1,0 +1,56 @@
+/* author-bio: values from source computed styles (jameshardie.com .author) */
+.author-bio {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 32px 0 0;
+  color: rgb(31 41 55);
+}
+
+.author-bio .author-bio-image {
+  flex: 0 0 96px;
+  line-height: 0;
+}
+
+.author-bio .author-bio-image img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.author-bio .author-bio-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 302px;
+}
+
+main .author-bio .author-bio-body h4 {
+  margin: 0;
+  color: var(--color-charcoal);
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  line-height: 24px;
+}
+
+main .author-bio .author-bio-body p {
+  margin: 8px 0 0;
+  color: var(--color-charcoal);
+  font-size: var(--body-font-size-m);
+  line-height: 26px;
+}
+
+main .author-bio .author-bio-body > :first-child {
+  margin-top: 0;
+}
+
+main .author-bio .author-bio-body > :last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 900px) {
+  main .author-bio .author-bio-body p {
+    margin-top: 16px;
+  }
+}

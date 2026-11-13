@@ -1,0 +1,295 @@
+/* Carousel Cards: values from the source computed styles (jameshardie.com, #splide03) */
+.carousel-cards {
+  display: grid;
+  gap: 32px;
+  border: 0 solid var(--border-color);
+  color: rgb(31 41 55);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+/* without an intro the slider bleeds into the section padding, like the source */
+.carousel-cards:not(.carousel-cards-has-intro) {
+  margin-inline: calc(-1 * var(--content-padding));
+}
+
+.carousel-cards .carousel-cards-intro > :first-child {
+  margin-top: 0;
+}
+
+.carousel-cards .carousel-cards-slider {
+  min-width: 0;
+}
+
+.carousel-cards .carousel-cards-track {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0 0 16px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-cards:not(.carousel-cards-has-intro) .carousel-cards-track {
+  padding-inline: var(--content-padding);
+  scroll-padding-inline: var(--content-padding);
+}
+
+.carousel-cards .carousel-cards-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-cards .carousel-cards-slide {
+  flex: 0 0 min(303px, 100%);
+  border-radius: var(--radius-s);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
+  scroll-snap-align: start;
+}
+
+.carousel-cards .carousel-cards-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+  border-radius: var(--radius-s);
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+/* image + title: one link */
+.carousel-cards a.carousel-cards-card-main:any-link {
+  display: block;
+  border: 0 solid var(--border-color);
+  color: rgb(31 41 55);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.carousel-cards .carousel-cards-card-image {
+  line-height: 0;
+  overflow: hidden;
+}
+
+.carousel-cards .carousel-cards-card-image img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 240px;
+  border-radius: var(--radius-s) var(--radius-s) 0 0;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-cards .carousel-cards-card:hover .carousel-cards-card-image img {
+  transform: scale(1.05);
+}
+
+.carousel-cards .carousel-cards-card-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 8px 0;
+  color: var(--color-charcoal);
+}
+
+.carousel-cards .carousel-cards-card-title :is(h1, h2, h3, h4, h5, h6) {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: inherit;
+  font-size: var(--heading-font-size-xs);
+  font-weight: 700;
+  line-height: 22px;
+  text-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.carousel-cards .carousel-cards-card-title sup {
+  position: relative;
+  top: -0.5em;
+  font-size: 75%;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+.carousel-cards .carousel-cards-card:hover .carousel-cards-card-title {
+  color: var(--color-green);
+  text-decoration: underline;
+}
+
+.carousel-cards .carousel-cards-card-arrow {
+  display: block;
+  flex: 0 0 24px;
+  stroke: var(--color-charcoal);
+}
+
+/* topic pills */
+.carousel-cards .carousel-cards-card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 0 16px;
+  overflow-y: hidden;
+}
+
+.carousel-cards a.carousel-cards-pill:any-link {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  box-sizing: border-box;
+  padding: 0;
+  border: 2px solid var(--color-green);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-gray-light);
+  color: var(--color-charcoal);
+  font-size: var(--body-font-size-xs);
+  line-height: 18px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.carousel-cards a.carousel-cards-pill:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+.carousel-cards .carousel-cards-pill span {
+  padding: 3.2px 12px 0;
+  line-height: 12.8px;
+}
+
+.carousel-cards .carousel-cards-card-body {
+  flex: 1;
+  padding: 0 16px;
+}
+
+.carousel-cards .carousel-cards-card-body > :first-child {
+  margin-top: 0;
+}
+
+.carousel-cards .carousel-cards-card-linked .carousel-cards-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+/* controls: arrows (desktop) and progress line */
+.carousel-cards .carousel-cards-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.carousel-cards:not(.carousel-cards-has-intro) .carousel-cards-controls {
+  padding-inline: var(--content-padding);
+}
+
+.carousel-cards .carousel-cards-controls[hidden] {
+  display: none;
+}
+
+.carousel-cards .carousel-cards-progress {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  height: 1px;
+  border-radius: var(--radius-s);
+  background-color: var(--color-green-dark);
+}
+
+.carousel-cards .carousel-cards-progress-bar {
+  display: block;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-green);
+  transition: margin-left 0.2s ease;
+}
+
+.carousel-cards .carousel-cards-prev,
+.carousel-cards .carousel-cards-next {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  color: rgb(31 41 55);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.carousel-cards .carousel-cards-prev:disabled,
+.carousel-cards .carousel-cards-next:disabled {
+  background-color: rgb(221 221 221);
+  cursor: default;
+}
+
+.carousel-cards .carousel-cards-nav-arrow {
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--color-white);
+}
+
+.carousel-cards .carousel-cards-next .carousel-cards-nav-arrow {
+  transform: rotate(180deg);
+}
+
+.carousel-cards :disabled > .carousel-cards-nav-arrow {
+  stroke: var(--color-gray-text);
+}
+
+@media (width >= 900px) {
+  .carousel-cards.carousel-cards-has-intro {
+    grid-template-columns: minmax(240px, 1fr) 2fr;
+    align-items: start;
+  }
+
+  .carousel-cards .carousel-cards-track {
+    gap: 24px;
+  }
+
+  .carousel-cards .carousel-cards-slide {
+    flex-basis: min(302px, 100%);
+  }
+
+  .carousel-cards .carousel-cards-card-title {
+    padding-inline: 16px;
+  }
+
+  .carousel-cards .carousel-cards-card-title :is(h1, h2, h3, h4, h5, h6) {
+    font-size: var(--heading-font-size-m);
+    line-height: 24px;
+  }
+
+  .carousel-cards .carousel-cards-controls {
+    height: 40px;
+  }
+
+  .carousel-cards .carousel-cards-prev,
+  .carousel-cards .carousel-cards-next {
+    display: flex;
+    order: -1;
+  }
+
+  .carousel-cards .carousel-cards-progress {
+    flex: 0 1 57%;
+    margin-left: auto;
+  }
+}

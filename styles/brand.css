@@ -1,0 +1,64 @@
+/* James Hardie brand tokens, measured from https://www.jameshardie.com/ */
+:root {
+  /* palette */
+  --color-green: #00833e;
+  --color-green-dark: #163c20;
+  --color-green-hover: #006b32;
+  --color-beige: #f6f5f3;
+  --color-stone: #d4ccc4;
+  --color-charcoal: #333;
+  --color-gray-text: #555;
+  --color-gray-light: #f3f3f3;
+  --color-white: #fff;
+
+  /* semantic colors */
+  --background-color: var(--color-white);
+  --light-color: var(--color-beige);
+  --dark-color: var(--color-charcoal);
+  --text-color: var(--color-gray-text);
+  --heading-color: var(--color-charcoal);
+  --link-color: var(--color-charcoal);
+  --link-hover-color: var(--color-green);
+  --link-underline-color: var(--color-green);
+  --accent-color: var(--color-green);
+  --accent-hover-color: var(--color-green-hover);
+  --border-color: #e5e7eb;
+
+  /* fonts: the source self-hosts Helvetica Neue Pro; Helvetica/Arial are the closest available */
+  --body-font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+  --heading-font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+
+  /* body sizes */
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+  --body-line-height: 1.4;
+
+  /* heading sizes (mobile first) */
+  --heading-font-size-xxl: 40px;
+  --heading-font-size-xl: 28px;
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+
+  /* layout */
+  --content-max-width: 1440px;
+  --article-column-width: 628px;
+  --content-padding: 16px;
+  --section-spacing: 40px;
+  --nav-height: 80px;
+  --radius-s: 4px;
+  --radius-pill: 9999px;
+}
+
+@media (width >= 900px) {
+  :root {
+    --heading-font-size-xxl: 48px;
+    --heading-font-size-xl: 32px;
+    --heading-font-size-l: 24px;
+    --heading-font-size-m: 20px;
+    --content-padding: 80px;
+    --section-spacing: 80px;
+  }
+}

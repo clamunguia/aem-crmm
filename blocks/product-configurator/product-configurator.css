@@ -1,0 +1,330 @@
+/* mobile first: intro, full-bleed preview, then the option groups */
+.product-configurator {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  color: var(--color-charcoal);
+}
+
+.product-configurator .product-configurator-panel {
+  display: contents;
+}
+
+/* preview */
+.product-configurator .product-configurator-preview {
+  margin-inline: calc(-1 * var(--content-padding, 16px));
+  padding-bottom: 16px;
+  line-height: 0;
+}
+
+.product-configurator .product-configurator-preview picture {
+  display: block;
+}
+
+.product-configurator .product-configurator-preview img {
+  display: block;
+  width: 100%;
+  height: 281px;
+  object-fit: cover;
+  background-color: rgb(0 0 0);
+}
+
+/* intro: name, optional subtitle, text */
+.product-configurator .product-configurator-intro {
+  order: -1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-configurator .product-configurator-intro h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 42px;
+  color: var(--color-charcoal);
+}
+
+.product-configurator .product-configurator-intro sup {
+  position: relative;
+  top: -0.5em;
+  font-size: 0.75em;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+.product-configurator .product-configurator-intro :is(h2, h3, h4) {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 40px;
+  color: var(--color-charcoal);
+}
+
+.product-configurator .product-configurator-intro p {
+  margin: 16px 0 0;
+  font-size: 20px;
+  line-height: 31px;
+  color: var(--color-gray-text);
+}
+
+/* option groups */
+.product-configurator .product-configurator-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.product-configurator .product-configurator-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-configurator .product-configurator-group-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--color-charcoal);
+}
+
+/* the selected value is announced (aria-live) but not shown, as on the source */
+.product-configurator .product-configurator-group-value {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.product-configurator .product-configurator-group-note {
+  margin-top: -8px;
+  font-size: var(--body-font-size-m);
+  line-height: 22px;
+  color: var(--color-gray-text);
+}
+
+.product-configurator .product-configurator-group-note > * {
+  margin: 0 0 8px;
+}
+
+.product-configurator .product-configurator-choices {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.product-configurator .product-configurator-choices:not(:has(.product-configurator-choice-swatch)) {
+  gap: 16px;
+}
+
+.product-configurator .product-configurator-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0 0 4px;
+  padding: 16px 20px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-s);
+  background: var(--color-beige);
+  color: var(--color-charcoal);
+  font: inherit;
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  min-width: 104px;
+  max-width: 120px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.product-configurator .product-configurator-choice.product-configurator-choice-swatch {
+  width: 140px;
+  min-width: 131px;
+  max-width: 140px;
+  padding: 4px;
+  background: transparent;
+}
+
+.product-configurator .product-configurator-choice-label {
+  max-width: 160px;
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
+.product-configurator .product-configurator-choice[aria-checked='true'] {
+  border-color: var(--color-green);
+  box-shadow: 0 1px 2px 0 rgb(51 51 51 / 6%), 0 1px 3px 0 rgb(51 51 51 / 10%);
+}
+
+.product-configurator .product-configurator-choice[aria-checked='true'] .product-configurator-choice-label {
+  font-weight: 700;
+}
+
+.product-configurator .product-configurator-choice:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+.product-configurator .product-configurator-swatch {
+  display: block;
+  width: 100%;
+  height: 131px;
+  overflow: hidden;
+  border-radius: var(--radius-s);
+  background-color: var(--color-charcoal);
+  box-shadow: 0 1px 2px 0 rgb(51 51 51 / 6%), 0 1px 3px 0 rgb(51 51 51 / 10%);
+  line-height: 0;
+}
+
+.product-configurator .product-configurator-swatch picture {
+  display: block;
+  height: 100%;
+}
+
+.product-configurator .product-configurator-swatch img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/* summary card: a trailing group with one plain choice (selected colour + sample CTA) */
+.product-configurator .product-configurator-group:last-child:not(:only-child):has(> .product-configurator-choices > .product-configurator-choice:only-child:not(.product-configurator-choice-swatch)) {
+  align-items: center;
+  gap: 12px;
+  padding: 16px 40px;
+  border: 1.5px solid var(--color-beige);
+  border-radius: 16px;
+  background: var(--color-white);
+  box-shadow: 0 4px 16px 0 rgb(51 51 51 / 10%);
+}
+
+.product-configurator .product-configurator-group:last-child:not(:only-child):has(> .product-configurator-choices > .product-configurator-choice:only-child:not(.product-configurator-choice-swatch)) .product-configurator-group-title {
+  font-size: var(--body-font-size-m);
+  line-height: 22px;
+  color: var(--color-gray-text);
+}
+
+.product-configurator .product-configurator-group:last-child:not(:only-child):has(> .product-configurator-choices > .product-configurator-choice:only-child:not(.product-configurator-choice-swatch)) .product-configurator-choices {
+  justify-content: center;
+  overflow: visible;
+}
+
+.product-configurator .product-configurator-group:last-child:not(:only-child) .product-configurator-choice:only-child:not(.product-configurator-choice-swatch) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0 24px;
+  border-color: var(--color-green);
+  border-radius: var(--radius-pill);
+  background: var(--color-green);
+  box-shadow: none;
+  color: var(--color-white);
+  font-size: var(--body-font-size-m);
+  line-height: 22px;
+  text-align: center;
+}
+
+.product-configurator .product-configurator-group:last-child:not(:only-child) .product-configurator-choice:only-child:not(.product-configurator-choice-swatch):hover {
+  border-color: var(--color-green-hover);
+  background: var(--color-green-hover);
+}
+
+.product-configurator .product-configurator-group:last-child:not(:only-child) .product-configurator-choice:only-child:not(.product-configurator-choice-swatch) .product-configurator-choice-label {
+  max-width: none;
+  padding-top: 3px;
+  font-size: var(--body-font-size-m);
+  line-height: 22px;
+  font-weight: 400;
+}
+
+/* CTAs / notes */
+.product-configurator .product-configurator-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  color: var(--color-charcoal);
+}
+
+.product-configurator .product-configurator-actions > * {
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  .product-configurator:has(.product-configurator-preview) {
+    grid-template-columns: minmax(0, 630px) minmax(0, 628px);
+    justify-content: center;
+    align-items: start;
+  }
+
+  .product-configurator .product-configurator-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .product-configurator .product-configurator-preview {
+    position: sticky;
+    top: var(--nav-height, 0);
+    margin-inline: 0;
+    padding-bottom: 0;
+  }
+
+  .product-configurator .product-configurator-preview img {
+    height: 717px;
+    border-radius: var(--radius-s);
+  }
+
+  .product-configurator .product-configurator-intro {
+    gap: 16px;
+  }
+
+  .product-configurator .product-configurator-intro h1 {
+    font-size: 36px;
+    line-height: 46px;
+  }
+
+  .product-configurator .product-configurator-intro :is(h2, h3, h4) {
+    font-size: 32px;
+  }
+
+  .product-configurator .product-configurator-intro p {
+    line-height: 28px;
+  }
+
+  .product-configurator .product-configurator-groups {
+    gap: 48px;
+  }
+
+  .product-configurator .product-configurator-group {
+    gap: 24px;
+  }
+
+  .product-configurator .product-configurator-choices {
+    flex-wrap: wrap;
+    gap: 12px;
+    overflow: visible;
+  }
+
+  .product-configurator .product-configurator-choices:not(:has(.product-configurator-choice-swatch)) {
+    gap: 32px;
+  }
+
+  .product-configurator .product-configurator-group:last-child:not(:only-child):has(> .product-configurator-choices > .product-configurator-choice:only-child:not(.product-configurator-choice-swatch)) {
+    gap: 16px;
+    padding: 24px 40px;
+  }
+}

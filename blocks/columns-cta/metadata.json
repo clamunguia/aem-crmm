@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-cta",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + link",
+    "purpose": "Side-by-side headings each with a CTA"
+  },
+  "contentPattern": {
+    "structure": "one row, one column per CTA: heading + link"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_42ac5fd8b504"
+  ],
+  "usage": "Use for: side-by-side headings each with a cta (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

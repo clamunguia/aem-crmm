@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-stats",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "list + heading + text",
+    "purpose": "Set of stat callouts"
+  },
+  "contentPattern": {
+    "structure": "one row, one column per stat: figure (heading) + label text"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_c808c9ac609a"
+  ],
+  "usage": "Use for: set of stat callouts (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

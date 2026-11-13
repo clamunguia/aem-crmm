@@ -1,0 +1,22 @@
+{
+  "variantName": "carousel-testimonial",
+  "baseBlock": "carousel",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "list + heading + text + image + button",
+    "purpose": "Testimonial slider with quote, name and portrait"
+  },
+  "contentPattern": {
+    "structure": "one row per testimonial: portrait image | quote text + name (heading or last paragraph)"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_31d15b593fb7"
+  ],
+  "usage": "Use for: testimonial slider with quote, name and portrait (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

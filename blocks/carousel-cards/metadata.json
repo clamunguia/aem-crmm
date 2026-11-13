@@ -1,0 +1,35 @@
+{
+  "variantName": "carousel-cards",
+  "baseBlock": "carousel",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + text + list + link + image + button",
+    "purpose": "Heading and intro beside a slider of link cards"
+  },
+  "contentPattern": {
+    "structure": "leading row(s) without image: intro heading, text, link; then one row per card: image | title, text, link"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    },
+    {
+      "class": "alt-2",
+      "label": "Alt 2"
+    }
+  ],
+  "memberVariantIds": [
+    "v_8948985c1203",
+    "v_8948985c1203-1",
+    "v_61f1f782c977",
+    "v_111c94cbd91f-2",
+    "v_2fb9883220bc"
+  ],
+  "usage": "Use for: heading and intro beside a slider of link cards (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt, alt-2) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

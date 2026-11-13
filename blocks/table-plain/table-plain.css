@@ -1,0 +1,69 @@
+/* Table Plain: values from source computed styles (jameshardie.com article table) */
+
+.table-plain {
+  border: 0 solid var(--border-color);
+  color: rgb(31 41 55);
+}
+
+/* narrow screens scroll the table sideways instead of widening the page */
+.table-plain .table-plain-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-plain table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: var(--body-font-size-m);
+}
+
+/* source cells keep the UA 1px padding and no borders; the gap below the text
+   is the source paragraph margin (16px in the header, 32px in body rows) */
+main .table-plain.block th,
+main .table-plain.block td {
+  padding: 1px;
+  border: 0;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 26px;
+  vertical-align: middle;
+}
+
+main .table-plain.block th {
+  padding-bottom: 17px;
+  text-align: center;
+}
+
+main .table-plain.block td {
+  padding-bottom: 33px;
+  text-align: start;
+}
+
+main .table-plain.block th strong,
+main .table-plain.block th b {
+  font-weight: 900;
+}
+
+main .table-plain.block th p,
+main .table-plain.block td p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+main .table-plain.block th p + p {
+  margin-top: 16px;
+}
+
+main .table-plain.block td p + p {
+  margin-top: 32px;
+}
+
+@media (width >= 900px) {
+  main .table-plain.block th,
+  main .table-plain.block td {
+    line-height: 22px;
+  }
+}

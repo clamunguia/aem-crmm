@@ -1,0 +1,40 @@
+{
+  "variantName": "columns-media",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + link + image",
+    "purpose": "Text beside a large photo or video"
+  },
+  "contentPattern": {
+    "structure": "one row: text (eyebrow, heading, text, CTA) | image, or video link with optional poster"
+  },
+  "options": [
+    {
+      "class": "green",
+      "label": "Green"
+    },
+    {
+      "class": "boxed",
+      "label": "Boxed"
+    },
+    {
+      "class": "benefits-list",
+      "label": "Benefits List"
+    }
+  ],
+  "memberVariantIds": [
+    "v_4ce0dd7f68a4",
+    "v_4ef0640a69b2",
+    "v_424331949d41",
+    "v_d54eb006f2ad",
+    "v_037eadb94323",
+    "v_b4ad01229578"
+  ],
+  "usage": "Use for: text beside a large photo or video (jameshardie.com).",
+  "reuseGuidance": "Add an option class (green, boxed, benefits-list) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

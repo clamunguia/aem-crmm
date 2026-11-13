@@ -1,0 +1,28 @@
+{
+  "variantName": "accordion-faq",
+  "baseBlock": "accordion",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + button",
+    "purpose": "Expandable FAQ question rows"
+  },
+  "contentPattern": {
+    "structure": "one row per question: question | answer"
+  },
+  "options": [
+    {
+      "class": "dark",
+      "label": "Dark"
+    }
+  ],
+  "memberVariantIds": [
+    "v_b739cb70acfd",
+    "v_652dcbb332f3"
+  ],
+  "usage": "Use for: expandable faq question rows (jameshardie.com).",
+  "reuseGuidance": "Add an option class (dark) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

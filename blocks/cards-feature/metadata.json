@@ -1,0 +1,29 @@
+{
+  "variantName": "cards-feature",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "text",
+    "purpose": "Row of icon + heading + text feature items"
+  },
+  "contentPattern": {
+    "structure": "one row per item: icon | heading + text"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    }
+  ],
+  "memberVariantIds": [
+    "v_d501a98dea96",
+    "v_d501a98dea96-1",
+    "v_d501a98dea96-2"
+  ],
+  "usage": "Use for: row of icon + heading + text feature items (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

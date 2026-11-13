@@ -1,0 +1,53 @@
+{
+  "variantName": "cards-article",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "list + link + heading",
+    "purpose": "Article teaser and icon link cards"
+  },
+  "contentPattern": {
+    "structure": "one row per card: image or icon | title, tag, link"
+  },
+  "options": [
+    {
+      "class": "icon",
+      "label": "Icon"
+    },
+    {
+      "class": "featured",
+      "label": "Featured"
+    },
+    {
+      "class": "light",
+      "label": "Light"
+    },
+    {
+      "class": "icon-2",
+      "label": "Icon 2"
+    },
+    {
+      "class": "buttons",
+      "label": "Buttons"
+    },
+    {
+      "class": "icon-alt",
+      "label": "Icon Alt"
+    }
+  ],
+  "memberVariantIds": [
+    "v_111c94cbd91f",
+    "v_b7caa6320938",
+    "v_bfe346835936",
+    "v_00122865f27e",
+    "v_55a4b02b6b03",
+    "v_302221ffef5e",
+    "v_b5457f225223"
+  ],
+  "usage": "Use for: article teaser and icon link cards (jameshardie.com).",
+  "reuseGuidance": "Add an option class (icon, featured, light, icon-2, buttons, icon-alt) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}
