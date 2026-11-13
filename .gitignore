@@ -10,6 +10,11 @@ tools/importer/reports/
 *.bak
 .idea
 
+# Local migration working files (site analysis and tool settings)
+catalog/
+.migration/
+.agents/
+
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
