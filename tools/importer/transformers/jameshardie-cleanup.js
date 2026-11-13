@@ -153,7 +153,7 @@ export default function transform(hookName, element, payload) {
       const h = img.getAttribute('height');
       const style = (img.getAttribute('style') || '').replace(/\s/g, '');
       if (
-        /bat\.bing\.com|bidr\.io|abcsinsights\.com|doubleclick|facebook\.com\/tr|google-analytics|googletagmanager|px\.ads|pixel/i.test(src)
+        /bat\.bing\.com|bidr\.io|abcsinsights\.com|w55c\.net|doubleclick|facebook\.com\/tr|google-analytics|googletagmanager|px\.ads|pixel/i.test(src)
         || (w === '1' && h === '1')
         || (w === '0' && h === '0')
         || /width:0px;height:0px/.test(style)
