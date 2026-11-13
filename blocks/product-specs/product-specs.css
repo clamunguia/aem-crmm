@@ -1,0 +1,265 @@
+/* Product Specs: spec accordion + install-resources sidebar (values from source computed styles) */
+.product-specs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  border: 0 solid var(--border-color);
+  color: rgb(31 41 55);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  interpolate-size: allow-keywords;
+}
+
+/* accordion */
+.product-specs .product-specs-list {
+  min-width: 0;
+}
+
+.product-specs .product-specs-item-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  border: 0 solid rgb(221 221 221);
+  border-bottom-width: 1px;
+  border-radius: 0;
+  padding: 16px 0;
+  background-color: var(--color-white);
+  color: var(--color-charcoal);
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.product-specs .product-specs-item-title {
+  font-weight: 400;
+  text-align: left;
+}
+
+.product-specs .product-specs-item-icon {
+  flex-shrink: 0;
+  padding-left: 32px;
+  color: var(--color-green);
+}
+
+.product-specs .product-specs-item-icon svg {
+  display: block;
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-specs .product-specs-item-icon path {
+  transition: opacity 0.2s;
+}
+
+.product-specs .product-specs-item-label[aria-expanded='true'] svg {
+  transform: rotate(0deg);
+}
+
+.product-specs .product-specs-item-label[aria-expanded='true'] path + path {
+  opacity: 0;
+}
+
+.product-specs .product-specs-item-body {
+  height: 0;
+  overflow: hidden;
+  background-color: var(--color-white);
+  transition: height 0.5s ease-in-out;
+}
+
+.product-specs .product-specs-item-label[aria-expanded='true'] + .product-specs-item-body {
+  height: auto;
+}
+
+.product-specs .product-specs-item-content > * {
+  margin-top: 0;
+}
+
+.product-specs .product-specs-item-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* spec tables: scroll horizontally inside the panel instead of overflowing the page */
+.product-specs .product-specs-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.product-specs .product-specs-table table {
+  width: fit-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  color: inherit;
+}
+
+.product-specs .product-specs-table tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color-white);
+}
+
+.product-specs .product-specs-table thead tr {
+  height: 36px;
+  background-color: rgb(249 248 247);
+}
+
+.product-specs .product-specs-table th,
+.product-specs .product-specs-table td {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 113px;
+  padding: 8px;
+  font-size: var(--body-font-size-s);
+  text-align: left;
+  vertical-align: top;
+}
+
+.product-specs .product-specs-table th {
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.product-specs .product-specs-table td {
+  line-height: 22px;
+}
+
+.product-specs .product-specs-table th:first-child,
+.product-specs .product-specs-table td:first-child {
+  min-width: 210px;
+}
+
+.product-specs .product-specs-table td:first-child {
+  color: var(--color-charcoal);
+  font-size: var(--body-font-size-m);
+}
+
+.product-specs .product-specs-table th:last-child,
+.product-specs .product-specs-table td:last-child {
+  min-width: auto;
+}
+
+.product-specs .product-specs-table th:last-child {
+  padding: 1px;
+}
+
+/* sidebar resources */
+.product-specs .product-specs-resources {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-specs .product-specs-resource {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-specs .product-specs-resource > * {
+  margin: 0;
+}
+
+.product-specs .product-specs-resource > * + * {
+  margin-top: 20px;
+}
+
+.product-specs .product-specs-resource > :is(h2, h3, h4, h5, h6) + * {
+  margin-top: 8px;
+}
+
+.product-specs .product-specs-resource picture,
+.product-specs .product-specs-resource img {
+  display: block;
+}
+
+.product-specs .product-specs-resource img,
+.product-specs .product-specs-resource .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.product-specs .product-specs-resource :is(h2, h3, h4, h5, h6) {
+  color: var(--color-charcoal);
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  line-height: 24px;
+  text-wrap: wrap;
+}
+
+.product-specs .product-specs-resource p {
+  color: var(--color-gray-text);
+  font-size: var(--body-font-size-m);
+  line-height: 26px;
+}
+
+.product-specs sup {
+  position: relative;
+  top: -0.5em;
+  font-size: 75%;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+.product-specs .product-specs-resource a:any-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  border: 0;
+  padding-top: 3px;
+  color: rgb(31 41 55);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 22px;
+  text-decoration: none;
+}
+
+.product-specs .product-specs-resource a:any-link:hover {
+  color: var(--color-green);
+}
+
+.product-specs .product-specs-resource a:any-link::after {
+  content: '';
+  flex-shrink: 0;
+  width: 14px;
+  height: 12px;
+  margin-top: -6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12' fill='none' viewBox='0 0 14 12'%3E%3Cpath stroke='%2300833E' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M1.375 6h11.25M7.375 11.25 12.625 6 7.375.75'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.product-specs .product-specs-resource a[href$='.pdf']:any-link::after {
+  width: 16px;
+  height: 16px;
+  margin-top: -3px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='14' fill='none' viewBox='0 0 12 14'%3E%3Cg stroke='%2300833E' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3Cpath d='M6.001 1.375v7.5M3.751 6.625l2.25 2.25 2.25-2.25M7.876 3.25H9c.828 0 1.5.672 1.5 1.5v6.375c0 .828-.672 1.5-1.5 1.5H3c-.828 0-1.5-.672-1.5-1.5V4.75c0-.828.672-1.5 1.5-1.5h1.125'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@media (width >= 900px) {
+  .product-specs:has(.product-specs-sidebar) {
+    grid-template-columns: minmax(0, 1fr) 302px;
+    gap: 135px;
+  }
+
+  .product-specs .product-specs-item-label {
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .product-specs .product-specs-table th:first-child,
+  .product-specs .product-specs-table td:first-child {
+    min-width: 301px;
+  }
+
+  .product-specs .product-specs-resource p {
+    line-height: 22px;
+  }
+}

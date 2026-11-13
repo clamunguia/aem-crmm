@@ -1,0 +1,28 @@
+{
+  "variantName": "hero-search",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "image + heading + text + link",
+    "purpose": "Split hero with a contractor-finder ZIP search"
+  },
+  "contentPattern": {
+    "structure": "one row: image | heading, text, optional list of project types, search page link"
+  },
+  "options": [
+    {
+      "class": "image-green",
+      "label": "Image Green"
+    }
+  ],
+  "memberVariantIds": [
+    "v_7e2256b2d9e6-2",
+    "v_7e2256b2d9e6-3"
+  ],
+  "usage": "Use for: split hero with a contractor-finder zip search (jameshardie.com).",
+  "reuseGuidance": "Add an option class (image-green) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

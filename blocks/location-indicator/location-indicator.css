@@ -1,0 +1,40 @@
+.location-indicator .location-indicator-display {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.location-indicator .location-indicator-display[hidden],
+.location-indicator .location-indicator-form[hidden] {
+  display: none;
+}
+
+.location-indicator .location-indicator-change,
+.location-indicator .location-indicator-cancel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.location-indicator .location-indicator-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.location-indicator .location-indicator-form input {
+  width: 8em;
+  padding: 8px 12px;
+  font: inherit;
+}
+
+.location-indicator .location-indicator-apply {
+  margin: 0;
+  cursor: pointer;
+}

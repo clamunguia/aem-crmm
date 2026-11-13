@@ -1,0 +1,32 @@
+{
+  "variantName": "product-configurator",
+  "baseBlock": "custom",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "image + heading + text + button + link",
+    "purpose": "Product detail panel with texture, collection and colour pickers and preview"
+  },
+  "contentPattern": {
+    "structure": "row 1: preview image | name, subtitle, intro; option-group rows: title (+ note) | choices (list or one per cell: swatch image, label, optional preview image or link); single-cell rows: CTAs"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    }
+  ],
+  "memberVariantIds": [
+    "v_6bd84834de3c",
+    "v_6bd84834de3c-1",
+    "v_6bd84834de3c-2",
+    "v_6bd84834de3c-3",
+    "v_6bd84834de3c-4",
+    "v_6bd84834de3c-5"
+  ],
+  "usage": "Use for: product detail panel with texture, collection and colour pickers and preview (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

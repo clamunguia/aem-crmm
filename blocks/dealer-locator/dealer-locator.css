@@ -1,0 +1,99 @@
+.dealer-locator {
+  display: grid;
+  gap: 32px;
+}
+
+.dealer-locator .dealer-locator-search {
+  position: relative;
+}
+
+.dealer-locator .dealer-locator-intro > :first-child {
+  margin-top: 0;
+}
+
+.dealer-locator .dealer-locator-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.dealer-locator .dealer-locator-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.dealer-locator .dealer-locator-field input,
+.dealer-locator .dealer-locator-field select {
+  padding: 12px;
+  font: inherit;
+}
+
+.dealer-locator .dealer-locator-submit {
+  margin: 0;
+  cursor: pointer;
+}
+
+.dealer-locator .dealer-locator-status:empty {
+  display: none;
+}
+
+.dealer-locator .dealer-locator-results {
+  display: grid;
+  gap: 24px;
+}
+
+.dealer-locator .dealer-locator-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.dealer-locator .dealer-locator-dealer[hidden] {
+  display: none;
+}
+
+.dealer-locator .dealer-locator-dealer > * {
+  margin: 0 0 4px;
+}
+
+.dealer-locator .dealer-locator-map {
+  line-height: 0;
+}
+
+.dealer-locator .dealer-locator-map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* image: search bar over a background image */
+.dealer-locator.image .dealer-locator-search {
+  padding: 48px 24px;
+  isolation: isolate;
+}
+
+.dealer-locator.image .dealer-locator-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  line-height: 0;
+}
+
+.dealer-locator.image .dealer-locator-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .dealer-locator .dealer-locator-results:has(.dealer-locator-list):has(.dealer-locator-map) {
+    grid-template-columns: 1fr 2fr;
+  }
+}

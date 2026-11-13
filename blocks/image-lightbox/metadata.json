@@ -1,0 +1,34 @@
+{
+  "variantName": "image-lightbox",
+  "baseBlock": "custom",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": false,
+    "imagePattern": "large",
+    "structure": "image + button",
+    "purpose": "Image(s) with a zoom button opening a lightbox"
+  },
+  "contentPattern": {
+    "structure": "one row per image: image | optional caption"
+  },
+  "options": [
+    {
+      "class": "dark",
+      "label": "Dark"
+    },
+    {
+      "class": "swatches",
+      "label": "Swatches"
+    }
+  ],
+  "memberVariantIds": [
+    "v_8093232c5f87",
+    "v_2a2ddc26390a",
+    "v_6490e159accb",
+    "v_b5577ac92386"
+  ],
+  "usage": "Use for: image(s) with a zoom button opening a lightbox (jameshardie.com).",
+  "reuseGuidance": "Add an option class (dark, swatches) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

@@ -1,0 +1,38 @@
+{
+  "variantName": "carousel-media",
+  "baseBlock": "carousel",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "list + video + heading + button",
+    "purpose": "Slider of photo or video tiles with captions"
+  },
+  "contentPattern": {
+    "structure": "one row per tile: image and/or video link | caption"
+  },
+  "options": [
+    {
+      "class": "dark",
+      "label": "Dark"
+    },
+    {
+      "class": "alt",
+      "label": "Alt"
+    },
+    {
+      "class": "alt-2",
+      "label": "Alt 2"
+    }
+  ],
+  "memberVariantIds": [
+    "v_d2f3db455729",
+    "v_111c94cbd91f-3",
+    "v_111c94cbd91f-4",
+    "v_111c94cbd91f-5"
+  ],
+  "usage": "Use for: slider of photo or video tiles with captions (jameshardie.com).",
+  "reuseGuidance": "Add an option class (dark, alt, alt-2) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

@@ -1,0 +1,23 @@
+{
+  "variantName": "cards-product",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "link + image + heading + text",
+    "purpose": "Product cards linking to product pages, with an optional wide promo card"
+  },
+  "contentPattern": {
+    "structure": "one row per card: image | name, text, link; a text-first row (body | image) is the wide promo card"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_90f598c7c2a6",
+    "v_90f598c7c2a6-1"
+  ],
+  "usage": "Use for: product cards linking to product pages, with an optional wide promo card (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

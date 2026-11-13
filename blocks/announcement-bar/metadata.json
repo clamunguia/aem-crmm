@@ -1,0 +1,22 @@
+{
+  "variantName": "announcement-bar",
+  "baseBlock": "custom",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "text + link + button",
+    "purpose": "Dismissible promo strip at the top of the page"
+  },
+  "contentPattern": {
+    "structure": "one row: message text with optional link"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_b534a877e81e"
+  ],
+  "usage": "Use for: dismissible promo strip at the top of the page (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

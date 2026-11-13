@@ -1,0 +1,38 @@
+{
+  "variantName": "hero-split",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + text + button + image",
+    "purpose": "Page-opening split banner with text panel beside a photo or video"
+  },
+  "contentPattern": {
+    "structure": "one row: heading, intro, CTAs | image or video link"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    },
+    {
+      "class": "light",
+      "label": "Light"
+    },
+    {
+      "class": "light-2",
+      "label": "Light 2"
+    }
+  ],
+  "memberVariantIds": [
+    "v_216a2f540cbb",
+    "v_7e2256b2d9e6",
+    "v_bac3a7c33b98",
+    "v_7e2256b2d9e6-1"
+  ],
+  "usage": "Use for: page-opening split banner with text panel beside a photo or video (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt, light, light-2) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

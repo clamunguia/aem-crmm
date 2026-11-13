@@ -1,0 +1,167 @@
+/* source: Sprinklr Instagram grid, square tiles with 2px padding (4px between photos) */
+.gallery-mosaic {
+  color: rgb(31 41 55);
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.gallery-mosaic .gallery-mosaic-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.gallery-mosaic .gallery-mosaic-tile {
+  position: relative;
+  padding: 2px;
+  line-height: 0;
+}
+
+.gallery-mosaic .gallery-mosaic-tile picture {
+  display: block;
+}
+
+.gallery-mosaic .gallery-mosaic-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.gallery-mosaic .gallery-mosaic-link {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border: 0;
+  color: rgb(255 255 255);
+  text-decoration: none;
+}
+
+/* overlay: hidden at rest, revealed on hover/focus like the source widget */
+.gallery-mosaic .gallery-mosaic-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.gallery-mosaic .gallery-mosaic-link:hover .gallery-mosaic-overlay,
+.gallery-mosaic .gallery-mosaic-link:focus-visible .gallery-mosaic-overlay {
+  opacity: 1;
+}
+
+.gallery-mosaic .gallery-mosaic-name {
+  position: absolute;
+  top: 9px;
+  left: 14px;
+  display: block;
+  max-width: 50%;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 13px;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgb(255 255 255);
+}
+
+.gallery-mosaic .gallery-mosaic-text {
+  position: absolute;
+  inset: 45px 16px 68px 15px;
+  display: block;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22.5px;
+  letter-spacing: 0.2px;
+  color: rgb(255 255 255 / 0%);
+  transition: color 0.2s ease;
+}
+
+.gallery-mosaic .gallery-mosaic-link:hover .gallery-mosaic-text,
+.gallery-mosaic .gallery-mosaic-link:focus-visible .gallery-mosaic-text {
+  color: rgb(255 255 255);
+}
+
+.gallery-mosaic .gallery-mosaic-caption {
+  position: absolute;
+  inset: auto 2px 2px;
+  margin: 0;
+  padding: 8px;
+  line-height: 1.3;
+}
+
+@media (width >= 600px) {
+  .gallery-mosaic .gallery-mosaic-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .gallery-mosaic .gallery-mosaic-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* swatch modes */
+.gallery-mosaic.swatches .gallery-mosaic-grid,
+.gallery-mosaic.cyan-light-green-grey-orange-yellow .gallery-mosaic-grid {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 16px;
+}
+
+.gallery-mosaic .gallery-mosaic-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gallery-mosaic .gallery-mosaic-swatch[hidden] {
+  display: none;
+}
+
+.gallery-mosaic .gallery-mosaic-swatch-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 4px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gallery-mosaic .gallery-mosaic-swatch-button[aria-pressed='true'] {
+  border-color: currentcolor;
+}
+
+.gallery-mosaic .gallery-mosaic-swatch-button img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.gallery-mosaic .gallery-mosaic-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.gallery-mosaic .gallery-mosaic-filter {
+  margin: 0;
+  cursor: pointer;
+}
+
+.gallery-mosaic .gallery-mosaic-selected:empty {
+  display: none;
+}

@@ -1,0 +1,22 @@
+{
+  "variantName": "location-indicator",
+  "baseBlock": "custom",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + button",
+    "purpose": "ZIP code indicator with change-location action"
+  },
+  "contentPattern": {
+    "structure": "row 1: label text | optional default ZIP; optional row 2: change-action label"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_6f2f37fa842e"
+  ],
+  "usage": "Use for: zip code indicator with change-location action (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

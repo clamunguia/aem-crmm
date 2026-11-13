@@ -1,0 +1,22 @@
+{
+  "variantName": "carousel-hotspot",
+  "baseBlock": "carousel",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "list + image + button + heading + text + link",
+    "purpose": "Image slider whose photos carry product hotspots with popovers"
+  },
+  "contentPattern": {
+    "structure": "one row per slide: image | hotspot cells starting with \"x, y\" percent position then heading, text, link; a cell without position is the caption"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_111c94cbd91f-1"
+  ],
+  "usage": "Use for: image slider whose photos carry product hotspots with popovers (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

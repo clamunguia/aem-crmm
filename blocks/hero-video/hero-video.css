@@ -1,0 +1,186 @@
+/* values measured from the source hero (jameshardie.com), mobile first */
+.hero-video {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  min-height: 600px;
+  max-width: 1440px;
+
+  /* full bleed: cancel the section's inline padding */
+  margin-inline: calc(-1 * var(--content-padding));
+  border: 0 solid var(--border-color);
+  color: rgb(31 41 55);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero-video .hero-video-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  line-height: 0;
+}
+
+.hero-video .hero-video-background picture,
+.hero-video .hero-video-background video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-video .hero-video-background img,
+.hero-video .hero-video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-video .hero-video-content {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 64px 16px 24px;
+  color: var(--color-white);
+}
+
+.hero-video .hero-video-content h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  color: var(--color-white);
+}
+
+.hero-video .hero-video-content p {
+  margin: 0;
+  padding: 24px 0 40px;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--color-white);
+}
+
+.hero-video .hero-video-content p.button-wrapper {
+  display: block;
+  padding: 0;
+}
+
+main .hero-video a.button:any-link {
+  width: fit-content;
+  min-block-size: 44px;
+  border-width: 0;
+  padding: 0 24px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.hero-video .hero-video-watch:any-link {
+  color: var(--color-white);
+}
+
+/* pause / play control (source: 48px ring, charcoal fill at 30%, white stroke) */
+.hero-video .hero-video-toggle {
+  position: absolute;
+  right: 16px;
+  bottom: 32px;
+  z-index: 30;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 0 solid var(--border-color);
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.hero-video .hero-video-toggle-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hero-video .hero-video-toggle svg {
+  display: block;
+  width: 48px;
+  height: 48px;
+  fill: none;
+  stroke: var(--color-white);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero-video .hero-video-toggle .hero-video-toggle-ring {
+  fill: var(--color-charcoal);
+  fill-opacity: 0.3;
+  stroke: var(--color-white);
+  transition: fill 0.2s ease, fill-opacity 0.2s ease, stroke 0.2s ease;
+}
+
+.hero-video .hero-video-toggle .hero-video-toggle-play {
+  display: none;
+  fill: var(--color-white);
+}
+
+.hero-video .hero-video-toggle.hero-video-paused .hero-video-toggle-play {
+  display: inline;
+}
+
+.hero-video .hero-video-toggle.hero-video-paused .hero-video-toggle-pause {
+  display: none;
+}
+
+.hero-video .hero-video-toggle:hover .hero-video-toggle-ring {
+  fill: var(--accent-color);
+  fill-opacity: 1;
+  stroke: transparent;
+}
+
+.hero-video .hero-video-toggle:focus-visible .hero-video-toggle-ring {
+  stroke: var(--accent-color);
+}
+
+.hero-video .hero-video-toggle:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+@media (width >= 900px) {
+  .hero-video {
+    min-height: 710px;
+  }
+
+  .hero-video .hero-video-content {
+    justify-content: center;
+    width: 58.3333%;
+    padding: 0 80px 32px;
+  }
+
+  .hero-video .hero-video-content h1 {
+    font-size: 72px;
+    line-height: 86px;
+  }
+
+  .hero-video .hero-video-content p {
+    padding: 32px 0 56px;
+  }
+
+  .hero-video .hero-video-toggle {
+    right: 80px;
+    bottom: 40px;
+  }
+}

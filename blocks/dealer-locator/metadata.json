@@ -1,0 +1,28 @@
+{
+  "variantName": "dealer-locator",
+  "baseBlock": "custom",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "link + button + image + video",
+    "purpose": "ZIP and radius dealer search with optional dealer list and map"
+  },
+  "contentPattern": {
+    "structure": "row 1: intro heading/text + optional search page link; image-only row: map or background; other rows: one dealer each (name, address, phone, links)"
+  },
+  "options": [
+    {
+      "class": "image",
+      "label": "Image"
+    }
+  ],
+  "memberVariantIds": [
+    "v_a532a6875252",
+    "v_8bcdcfd434cb"
+  ],
+  "usage": "Use for: zip and radius dealer search with optional dealer list and map (jameshardie.com).",
+  "reuseGuidance": "Add an option class (image) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

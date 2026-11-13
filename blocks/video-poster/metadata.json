@@ -1,0 +1,22 @@
+{
+  "variantName": "video-poster",
+  "baseBlock": "video",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "video + button",
+    "purpose": "Standalone video with poster and play button"
+  },
+  "contentPattern": {
+    "structure": "one row: video link + optional poster image"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_64108553f22c"
+  ],
+  "usage": "Use for: standalone video with poster and play button (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

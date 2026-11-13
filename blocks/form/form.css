@@ -1,0 +1,91 @@
+.form {
+  display: grid;
+  gap: 32px;
+}
+
+.form .form-intro > :first-child {
+  margin-top: 0;
+}
+
+.form .form-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px 24px;
+}
+
+.form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form .form-field-hidden {
+  display: none;
+}
+
+.form .form-field input:not([type='radio'], [type='checkbox']),
+.form .form-field select,
+.form .form-field textarea {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.form .form-field fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form .form-field legend {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.form .form-field fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form .form-required::after {
+  content: ' *';
+}
+
+.form .form-submit {
+  justify-self: start;
+  margin: 8px 0 0;
+  cursor: pointer;
+}
+
+.form .form-error:empty {
+  display: none;
+}
+
+.form .form-form[hidden],
+.form .form-confirmation[hidden] {
+  display: none;
+}
+
+@media (width >= 900px) {
+  .form .form-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form .form-field-textarea,
+  .form .form-field-radio,
+  .form .form-field-checkbox,
+  .form .form-submit,
+  .form .form-error {
+    grid-column: 1 / -1;
+  }
+
+  .form.links-sidebar:has(.form-aside) {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}

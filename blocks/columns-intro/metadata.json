@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-intro",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + link",
+    "purpose": "Heading left, copy and CTA right"
+  },
+  "contentPattern": {
+    "structure": "one row: heading | text + link"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_8a899c447252"
+  ],
+  "usage": "Use for: heading left, copy and cta right (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

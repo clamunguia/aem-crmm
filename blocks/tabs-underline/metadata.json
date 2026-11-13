@@ -1,0 +1,38 @@
+{
+  "variantName": "tabs-underline",
+  "baseBlock": "tabs",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + link",
+    "purpose": "Tab labels with underline on the active one, or category tab navigation"
+  },
+  "contentPattern": {
+    "structure": "one row per tab: label | panel content or /fragments/ link; link-only labels with no panels render as navigation"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    },
+    {
+      "class": "alt-2",
+      "label": "Alt 2"
+    },
+    {
+      "class": "alt-3",
+      "label": "Alt 3"
+    }
+  ],
+  "memberVariantIds": [
+    "v_f1c9c5c68e8f",
+    "v_22cda5945b59",
+    "v_c5bfa377b845",
+    "v_5d3f731c52b2"
+  ],
+  "usage": "Use for: tab labels with underline on the active one, or category tab navigation (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt, alt-2, alt-3) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

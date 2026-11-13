@@ -1,0 +1,33 @@
+{
+  "variantName": "gallery-mosaic",
+  "baseBlock": "custom",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "link",
+    "purpose": "Edge-to-edge photo mosaic, or a colour swatch picker / palette browser"
+  },
+  "contentPattern": {
+    "structure": "mosaic: cells with image (+ optional link); swatch options: one row per colour: swatch image | name | family (optional) | link (optional)"
+  },
+  "options": [
+    {
+      "class": "swatches",
+      "label": "Swatches"
+    },
+    {
+      "class": "cyan-light-green-grey-orange-yellow",
+      "label": "Cyan Light Green Grey Orange Yellow"
+    }
+  ],
+  "memberVariantIds": [
+    "v_9823b7e7deea",
+    "v_bf19a8cb3e05",
+    "v_bf19a8cb3e05-1"
+  ],
+  "usage": "Use for: edge-to-edge photo mosaic, or a colour swatch picker / palette browser (jameshardie.com).",
+  "reuseGuidance": "Add an option class (swatches, cyan-light-green-grey-orange-yellow) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

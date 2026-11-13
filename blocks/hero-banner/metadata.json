@@ -1,0 +1,33 @@
+{
+  "variantName": "hero-banner",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + text",
+    "purpose": "Text-only page intro banner"
+  },
+  "contentPattern": {
+    "structure": "one row: heading | summary text + optional CTA (or one cell with both)"
+  },
+  "options": [
+    {
+      "class": "centered",
+      "label": "Centered"
+    },
+    {
+      "class": "green",
+      "label": "Green"
+    }
+  ],
+  "memberVariantIds": [
+    "v_64e3c139a2c2",
+    "v_9c63cdb869cd",
+    "v_247a7a5f009e"
+  ],
+  "usage": "Use for: text-only page intro banner (jameshardie.com).",
+  "reuseGuidance": "Add an option class (centered, green) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

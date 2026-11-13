@@ -1,0 +1,36 @@
+.docs-browse-toggle .docs-browse-toggle-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.docs-browse-toggle .docs-browse-toggle-legend {
+  float: left;
+  margin-right: 8px;
+  padding: 0;
+}
+
+.docs-browse-toggle .docs-browse-toggle-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.docs-browse-toggle .docs-browse-toggle-option input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: currentcolor;
+}
+
+.docs-browse-toggle .docs-browse-toggle-panels {
+  margin-top: 24px;
+}
+
+.docs-browse-toggle .docs-browse-toggle-panel[hidden] {
+  display: none;
+}

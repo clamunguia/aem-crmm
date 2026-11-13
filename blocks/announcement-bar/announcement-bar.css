@@ -1,0 +1,53 @@
+.announcement-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+}
+
+.announcement-bar[hidden] {
+  display: none;
+}
+
+.announcement-bar .announcement-bar-content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0 12px;
+  text-align: center;
+}
+
+.announcement-bar .announcement-bar-content > * {
+  margin: 0;
+}
+
+.announcement-bar .announcement-bar-close {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.announcement-bar .announcement-bar-close::before,
+.announcement-bar .announcement-bar-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  background-color: currentcolor;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.announcement-bar .announcement-bar-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}

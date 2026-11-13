@@ -1,0 +1,39 @@
+{
+  "variantName": "search-results",
+  "baseBlock": "custom",
+  "canonicalModel": "configuration",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "text + field + button + list + heading + link + image",
+    "purpose": "Filterable results with keyword, sort and category filters and result cards"
+  },
+  "contentPattern": {
+    "structure": "config rows (source | JSON index link, limit | n, filter-title | text); single-cell intro rows; result rows: image | title link + text | categories | date"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    },
+    {
+      "class": "light",
+      "label": "Light"
+    },
+    {
+      "class": "alt-2",
+      "label": "Alt 2"
+    }
+  ],
+  "memberVariantIds": [
+    "v_22cd38cbc07b",
+    "v_303818d9107d",
+    "v_5455517cd403",
+    "v_5a5356c8e697",
+    "v_ab322a794829"
+  ],
+  "usage": "Use for: filterable results with keyword, sort and category filters and result cards (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt, light, alt-2) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

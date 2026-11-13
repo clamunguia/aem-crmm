@@ -1,0 +1,22 @@
+{
+  "variantName": "color-search",
+  "baseBlock": "custom",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "field",
+    "purpose": "Colour-name search field"
+  },
+  "contentPattern": {
+    "structure": "row 1: label/placeholder; optional row 2: link to a search page (else filters on-page colour items)"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_03e2b2f0e35d"
+  ],
+  "usage": "Use for: colour-name search field (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

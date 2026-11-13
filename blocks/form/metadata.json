@@ -1,0 +1,33 @@
+{
+  "variantName": "form",
+  "baseBlock": "custom",
+  "canonicalModel": "configuration",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "heading + text + field + link + video + button",
+    "purpose": "Lead-capture and contact form"
+  },
+  "contentPattern": {
+    "structure": "field rows: label | type | options (comma list, \"required\"); submit row: label | submit | endpoint link; confirmation row; single-cell rows are intro (before fields) or sidebar (after fields)"
+  },
+  "options": [
+    {
+      "class": "links-sidebar",
+      "label": "Links Sidebar"
+    },
+    {
+      "class": "alt",
+      "label": "Alt"
+    }
+  ],
+  "memberVariantIds": [
+    "v_29c0a48d6883",
+    "v_40b84c8ea2a2",
+    "v_abfaf9eff5e7"
+  ],
+  "usage": "Use for: lead-capture and contact form (jameshardie.com).",
+  "reuseGuidance": "Add an option class (links-sidebar, alt) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

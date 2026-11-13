@@ -1,0 +1,28 @@
+{
+  "variantName": "quote",
+  "baseBlock": "custom",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "text",
+    "purpose": "Pull quote with quote glyph and optional attribution"
+  },
+  "contentPattern": {
+    "structure": "row 1: quote text; optional row 2 / second cell: attribution"
+  },
+  "options": [
+    {
+      "class": "alt",
+      "label": "Alt"
+    }
+  ],
+  "memberVariantIds": [
+    "v_25013399f88d",
+    "v_e02c139c37e5"
+  ],
+  "usage": "Use for: pull quote with quote glyph and optional attribution (jameshardie.com).",
+  "reuseGuidance": "Add an option class (alt) for the catalogued look; unknown option tokens are ignored. Authors may add or omit cells."
+}

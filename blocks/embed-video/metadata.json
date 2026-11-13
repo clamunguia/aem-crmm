@@ -1,0 +1,22 @@
+{
+  "variantName": "embed-video",
+  "baseBlock": "embed",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "video",
+    "purpose": "Embedded YouTube or Vimeo player"
+  },
+  "contentPattern": {
+    "structure": "one row: video link, optional poster image"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_d6f970846cea"
+  ],
+  "usage": "Use for: embedded youtube or vimeo player (jameshardie.com).",
+  "reuseGuidance": "Reuse as-is; authors may add or omit cells and the block decorates defensively."
+}

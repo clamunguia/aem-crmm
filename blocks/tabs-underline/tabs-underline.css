@@ -1,0 +1,243 @@
+/* shared tab row (default look, alt, alt-3, category navigation) */
+.tabs-underline .tabs-underline-list {
+  display: flex;
+  gap: 32px;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid color-mix(in srgb, currentcolor 20%, transparent);
+}
+
+.tabs-underline .tabs-underline-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs-underline .tabs-underline-tab {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tabs-underline .tabs-underline-tab[aria-selected='true'],
+.tabs-underline .tabs-underline-tab[aria-current='page'] {
+  border-bottom-color: currentcolor;
+}
+
+.tabs-underline .tabs-underline-panel {
+  padding-top: 24px;
+}
+
+.tabs-underline .tabs-underline-panel[hidden] {
+  display: none;
+}
+
+.tabs-underline .tabs-underline-panel > :first-child {
+  margin-top: 0;
+}
+
+.tabs-underline.alt-3 .tabs-underline-panel ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+/* single row "title | link": section heading bar, full width of the section like the source */
+.tabs-underline.tabs-underline-heading {
+  display: block;
+  margin: 0 calc(-1 * var(--content-padding)) 24px;
+  padding: 0 var(--content-padding);
+  border: 0 solid var(--border-color);
+  color: rgb(31 41 55);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.tabs-underline .tabs-underline-title {
+  order: 1;
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 46px;
+  color: var(--color-charcoal);
+}
+
+/* the source hides the button on small screens; the section repeats it below the content */
+main .tabs-underline a.button.tabs-underline-cta:any-link {
+  display: none;
+  order: 3;
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  border: 2px solid var(--color-green);
+  border-radius: var(--radius-pill);
+  background-color: transparent;
+  color: var(--color-charcoal);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+main .tabs-underline a.button.tabs-underline-cta:hover,
+main .tabs-underline a.button.tabs-underline-cta:focus-visible {
+  background-color: rgb(0 131 62 / 10%);
+  color: var(--color-charcoal);
+}
+
+.tabs-underline .tabs-underline-cta span {
+  padding-top: 3px;
+}
+
+.tabs-underline .tabs-underline-cta svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+/* alt-2: centered underline tabs, full width of the section */
+.tabs-underline.alt-2 {
+  margin: 0 calc(-1 * var(--content-padding));
+  border: 0 solid var(--border-color);
+  color: rgb(31 41 55);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.tabs-underline.alt-2 .tabs-underline-list {
+  position: relative;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 24px 36px;
+  border-bottom: 0;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+}
+
+.tabs-underline.alt-2 .tabs-underline-tab {
+  display: block;
+  flex: 0 1 auto;
+  padding: 0;
+  border: 0 solid var(--border-color);
+  color: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  white-space: normal;
+}
+
+.tabs-underline.alt-2 .tabs-underline-label {
+  display: block;
+  min-width: fit-content;
+  padding: 6px 16px 5px;
+  border-bottom: 3px solid transparent;
+  color: var(--color-gray-text);
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: capitalize;
+  scroll-margin-left: 24px;
+}
+
+.tabs-underline.alt-2 .tabs-underline-tab[aria-selected='true'] .tabs-underline-label {
+  border-bottom-color: var(--color-green);
+  color: var(--color-charcoal);
+  font-weight: 700;
+}
+
+.tabs-underline.alt-2 .tabs-underline-panel {
+  margin: 64px 0;
+  padding: 0 var(--content-padding);
+}
+
+.tabs-underline.alt-2 .tabs-underline-panel h2 {
+  margin: 0;
+  padding-bottom: 24px;
+  font-size: 28px;
+  line-height: 40px;
+  color: var(--color-charcoal);
+}
+
+.tabs-underline.alt-2 .tabs-underline-panel p {
+  margin: 0;
+  padding-bottom: 24px;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-gray-text);
+}
+
+/* source panel link: plain text followed by an arrow, no underline */
+main .tabs-underline.alt-2 .tabs-underline-panel a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 0;
+  color: var(--color-charcoal);
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+}
+
+main .tabs-underline.alt-2 .tabs-underline-panel a:any-link::after {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0.75 12H23.25'/%3E%3Cpath d='M12.75 22.5L23.25 12L12.75 1.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.tabs-underline.alt-2 .tabs-underline-panel a:any-link:hover {
+  color: var(--color-green);
+}
+
+@media (width >= 900px) {
+  .tabs-underline.tabs-underline-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  main .tabs-underline a.button.tabs-underline-cta:any-link {
+    display: flex;
+    width: fit-content;
+  }
+
+  .tabs-underline.alt-2 .tabs-underline-list {
+    justify-content: center;
+    padding: 24px 0;
+  }
+
+  .tabs-underline.alt-2 .tabs-underline-label {
+    min-width: 100px;
+    padding: 6px 24px 5px;
+  }
+
+  .tabs-underline.alt-2 .tabs-underline-tab:hover .tabs-underline-label {
+    font-weight: 700;
+  }
+
+  .tabs-underline.alt-2 .tabs-underline-panel {
+    max-width: calc(100% * 5 / 12);
+  }
+
+  .tabs-underline.alt-2 .tabs-underline-panel p {
+    line-height: 22px;
+  }
+
+  .tabs-underline.alt-2 .tabs-underline-panel h2 {
+    font-size: 32px;
+  }
+}
