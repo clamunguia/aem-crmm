@@ -48,14 +48,27 @@ footer .footer li + li {
   margin-top: 10px;
 }
 
-footer .footer .section:first-child ul {
+/* the logo and social links section: first, or right after the footnotes */
+footer .footer :is(.section:first-child, .footnotes + .section) ul {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 20px;
 }
 
-footer .footer .section:first-child li + li {
+footer .footer :is(.section:first-child, .footnotes + .section) li + li {
   margin-top: 0;
+}
+
+/* legal footnotes (section style "footnotes"): small, italic, muted */
+footer .footer .section.footnotes {
+  color: rgb(255 255 255 / 70%);
+  font-size: var(--body-font-size-xs);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+footer .footer .section.footnotes p + p {
+  margin-top: 8px;
 }
 
 footer .footer a:any-link {
