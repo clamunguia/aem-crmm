@@ -4,11 +4,13 @@
  * then the page itself, read it back and compare. With --preview, preview the videos and pages.
  *
  *   node tools/importer/da-sync/push.mjs <page|url>... [--urls <file>]
- *     [--preview] [--force] [--dry-run]
+ *     [--preview] [--force] [--allow-external] [--dry-run]
  *
  * Safety: a page that already exists in DA with different content is skipped unless --force
  * (someone may have edited it in DA: run pull.mjs first). Pages that still load media from
- * another site are skipped: run localize.mjs first. Nothing is ever published live.
+ * another site are skipped (run localize.mjs first) unless --allow-external, for media that
+ * cannot be self-hosted yet (e.g. videos over 36 MB); they are listed in the output.
+ * Nothing is ever published live.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -24,13 +26,16 @@ const sharedFile = (url) => {
   return p.startsWith(SHARED) ? p.slice(SHARED.length) : null;
 };
 
-async function pushPage(page, { force, dryRun, withPreview }) {
+async function pushPage(page, {
+  force, dryRun, withPreview, allowExternal,
+}) {
   const file = pageFile(page);
   if (!fs.existsSync(file)) return { page, status: 'error', detail: 'page not found in content/' };
   const main = readMain(file);
   const { images, videos } = mediaRefs(main);
   const external = [...images, ...videos].filter((u) => !isOwn(u));
-  if (external.length) return { page, status: 'skipped', detail: `${external.length} media still on another site: run localize.mjs first` };
+  if (external.length && !allowExternal) return { page, status: 'skipped', detail: `${external.length} media still on another site: run localize.mjs first` };
+  external.forEach((u) => log(`         external (kept): ${u.slice(0, 110)}`));
 
   const doc = daDocument(main);
   const local = readMain(file);
@@ -89,7 +94,12 @@ if (!pages.length) {
   process.exit(2);
 }
 log(`DA: ${DA_CONTENT}`);
-const opts = { force: flag(args, '--force'), dryRun: flag(args, '--dry-run'), withPreview: flag(args, '--preview') };
+const opts = {
+  force: flag(args, '--force'),
+  dryRun: flag(args, '--dry-run'),
+  withPreview: flag(args, '--preview'),
+  allowExternal: flag(args, '--allow-external'),
+};
 const results = [];
 for (const page of pages) {
   let r;
