@@ -49,11 +49,16 @@ function innerUrl(url) {
   return inner ? decodeURIComponent(inner) : url;
 }
 
+/** Largest image the preview accepts. */
+const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
+
 /** URLs to try for an image, best first. */
 function imageCandidates(url) {
   const real = innerUrl(url);
-  if (real.includes('images.ctfassets.net')) {
-    const base = real.split('?')[0];
+  const { host } = new URL(real);
+  // Contentful: images.* and downloads.* serve the same asset; only images.* resizes it
+  if (host === 'images.ctfassets.net' || host === 'downloads.ctfassets.net') {
+    const base = real.split('?')[0].replace('//downloads.ctfassets.net/', '//images.ctfassets.net/');
     const isPng = /\.png$/i.test(new URL(base).pathname);
     return [`${base}?w=2000${isPng ? '' : '&fm=jpg&q=80'}`, url];
   }
@@ -86,6 +91,8 @@ async function localizePage(page, dryRun) {
     const got = await download(imageCandidates(url), 'image/jpeg,image/png,image/svg+xml;q=0.9,*/*;q=0.5');
     if (!got || !ACCEPTED_IMAGES.has(got.kind)) {
       failed.push({ url, reason: got ? `unsupported image type ${got.kind}` : 'download failed' });
+    } else if (got.buf.length > MAX_IMAGE_BYTES) {
+      failed.push({ url, reason: `image is ${(got.buf.length / 1048576).toFixed(1)} MB; the preview accepts up to 20 MB (resize it first)` });
     } else {
       const name = `${slug(path.basename(new URL(innerUrl(url)).pathname))}-${hash(url)}.${got.kind}`;
       const rel = `/media-da/${page}/${name}`;
