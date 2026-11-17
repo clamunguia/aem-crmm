@@ -11,7 +11,8 @@
     "da:localize": "node tools/importer/da-sync/localize.mjs",
     "da:push": "node tools/importer/da-sync/push.mjs",
     "da:pull": "node tools/importer/da-sync/pull.mjs",
-    "da:inventory": "node tools/importer/da-sync/inventory.mjs"
+    "da:inventory": "node tools/importer/da-sync/inventory.mjs",
+    "da:relink": "node tools/importer/da-sync/relink.mjs"
   },
   "repository": {
     "type": "git",
