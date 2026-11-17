@@ -1,3 +1,10 @@
+/*
+ * Footer, laid out like jameshardie.com. footer.js labels the footer document's sections:
+ *   .footnotes      optional legal notes (author section style "footnotes")
+ *   .footer-main    "Follow James Hardie" + social links + "Contact Us" | columns block (4 lists)
+ *   .footer-logo    a single linked image
+ *   .footer-bottom  copyright | legal links list | buttons
+ */
 footer {
   background-color: var(--color-charcoal);
   color: var(--color-white);
@@ -34,10 +41,6 @@ footer .footer p {
   margin: 0;
 }
 
-footer .footer p + p {
-  margin-top: 12px;
-}
-
 footer .footer ul {
   margin: 0;
   padding: 0;
@@ -45,30 +48,7 @@ footer .footer ul {
 }
 
 footer .footer li + li {
-  margin-top: 10px;
-}
-
-/* the logo and social links section: first, or right after the footnotes */
-footer .footer :is(.section:first-child, .footnotes + .section) ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
-}
-
-footer .footer :is(.section:first-child, .footnotes + .section) li + li {
-  margin-top: 0;
-}
-
-/* legal footnotes (section style "footnotes"): small, italic, muted */
-footer .footer .section.footnotes {
-  color: rgb(255 255 255 / 70%);
-  font-size: var(--body-font-size-xs);
-  font-style: italic;
-  line-height: 1.5;
-}
-
-footer .footer .section.footnotes p + p {
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 footer .footer a:any-link {
@@ -81,12 +61,50 @@ footer .footer a:hover {
   text-decoration: underline;
 }
 
+/* legal notes: small, italic, muted */
+footer .footer .footnotes {
+  color: rgb(255 255 255 / 70%);
+  font-size: var(--body-font-size-xs);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+footer .footer .footnotes p + p {
+  margin-top: 8px;
+}
+
+/* main: social links, contact and the 4 link columns */
+footer .footer .footer-main {
+  font-size: var(--body-font-size-m);
+}
+
+footer .footer .footer-main .default-content-wrapper > h3 {
+  margin-top: 0;
+}
+
+footer .footer .footer-main .default-content-wrapper > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+footer .footer .footer-main .default-content-wrapper > ul li + li {
+  margin-top: 0;
+}
+
+/* "Contact Us" and the phone number on one line */
+footer .footer .footer-main .default-content-wrapper > ul + h3,
+footer .footer .footer-main .default-content-wrapper > ul + h3 + p {
+  display: inline-block;
+  margin: 32px 16px 0 0;
+}
+
 /*
  * Social links: shown as their network's icon (icons/socialmedia-*-white.svg), picked from the
  * link's address. The link text stays in the page for screen readers. To add a network, add its
  * domain to the list and a line with its icon below.
  */
-footer .footer .default-content-wrapper > ul a:is(
+footer .footer .footer-main .default-content-wrapper > ul a:is(
   [href*="youtube.com"], [href*="facebook.com"], [href*="instagram.com"],
   [href*="pinterest.com"], [href*="houzz.com"], [href*="linkedin.com"]
 ) {
@@ -101,7 +119,7 @@ footer .footer .default-content-wrapper > ul a:is(
   transition: opacity 0.2s;
 }
 
-footer .footer .default-content-wrapper > ul a:is(
+footer .footer .footer-main .default-content-wrapper > ul a:is(
   [href*="youtube.com"], [href*="facebook.com"], [href*="instagram.com"],
   [href*="pinterest.com"], [href*="houzz.com"], [href*="linkedin.com"]
 ):hover {
@@ -116,18 +134,64 @@ footer .footer a[href*="pinterest.com"] { --social-icon: url('../../icons/social
 footer .footer a[href*="houzz.com"] { --social-icon: url('../../icons/socialmedia-houzz-white.svg'); }
 footer .footer a[href*="linkedin.com"] { --social-icon: url('../../icons/socialmedia-linkedin-white.svg'); }
 
-footer .footer .columns > div {
+footer .footer .footer-main .columns-wrapper {
+  margin-top: 40px;
+}
+
+footer .footer .footer-main .columns > div {
   display: grid;
   grid-template-columns: 1fr;
+  align-items: start;
+  gap: 32px 24px;
+}
+
+footer .footer .footer-main .columns-wrapper .columns h3 {
+  margin: 0 0 24px;
+}
+
+/* logo: after the columns, no divider */
+footer .footer .section.footer-logo {
+  margin-top: 48px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+footer .footer .footer-logo img {
+  width: 208px;
+}
+
+/* bottom bar: copyright, legal links and buttons in one row */
+footer .footer .footer-bottom .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  font-size: var(--body-font-size-xs);
+  line-height: 1.5;
+}
+
+footer .footer .footer-bottom .default-content-wrapper > p:first-child {
+  flex: 1 1 100%;
+}
+
+footer .footer .footer-bottom .default-content-wrapper > ul {
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px 24px;
 }
 
-footer .footer .columns h3 {
+footer .footer .footer-bottom .default-content-wrapper > ul li + li {
   margin-top: 0;
 }
 
+footer .footer .footer-bottom .button {
+  margin: 0;
+  padding: 6px 16px;
+  font-size: var(--body-font-size-xs);
+}
+
 @media (width >= 600px) {
-  footer .footer .columns > div {
+  footer .footer .footer-main .columns > div {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -137,7 +201,48 @@ footer .footer .columns h3 {
     padding: 64px var(--content-padding) 32px;
   }
 
-  footer .footer .columns > div {
-    grid-template-columns: repeat(4, 1fr);
+  /* social + contact in 4 of 12 columns, the link lists in the other 8 */
+  footer .footer .footer-main {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+
+  footer .footer .footer-main > .default-content-wrapper {
+    grid-column: 1 / span 4;
+  }
+
+  footer .footer .footer-main > .columns-wrapper {
+    grid-column: 5 / span 8;
+    margin-top: 0;
+  }
+
+  footer .footer .footer-main .columns > div {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  footer .footer .footer-bottom .default-content-wrapper > p:first-child {
+    flex: 0 1 200px;
+  }
+
+  /* legal links share the row; long ones wrap onto two lines, as on the source site */
+  footer .footer .footer-bottom .default-content-wrapper > ul {
+    flex: 1 1 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-width: 0;
+  }
+
+  footer .footer .footer-bottom .default-content-wrapper > ul li {
+    max-width: 140px;
+  }
+
+  /* the buttons sit at the right end of the row */
+  footer .footer .footer-bottom .default-content-wrapper > ul + p.button-container {
+    margin-left: auto;
+  }
+
+  footer .footer .footer-bottom .button {
+    white-space: nowrap;
   }
 }
