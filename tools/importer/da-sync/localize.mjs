@@ -35,10 +35,14 @@ function sniff(buf) {
   return null;
 }
 
+/**
+ * File-name-safe slug. Trims hyphens after cutting to 60 characters: a trailing hyphen plus the
+ * "-<hash>" suffix would give "--", which the preview turns into "-" and then cannot find the file.
+ */
 function slug(text) {
   return text.toLowerCase().replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 60) || 'media';
+    .slice(0, 60)
+    .replace(/^-+|-+$/g, '') || 'media';
 }
 
 const hash = (text) => crypto.createHash('sha1').update(text).digest('hex').slice(0, 8);
