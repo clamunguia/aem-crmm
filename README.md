@@ -70,7 +70,8 @@ Every block's JS starts with a comment describing its authoring structure and op
 | `columns-intro` | Heading on the left, copy and CTA on the right |
 | `columns` | Plain columns (used by the footer) |
 | `cards-feature` | Row of features: icon + heading + text |
-| `cards-article` | Article teaser cards (options: `icon`, `icon-2`, `icon-alt`) |
+| `cards-article` | Article teaser cards (options: `icon`, `icon-2`, `icon-alt`, `featured`, `light`) |
+| `article-list` | Lists a folder's published articles as cards, 15 per page, with pagination (`?page=2`). Reads the site index. Rows: `folder`, `per-page`, `exclude` |
 | `cards-video` | Video cards with title and description |
 | `carousel-cards` | Heading and intro beside a slider of link cards |
 | `carousel-hotspot` | Photo slider with product hotspots |
@@ -150,6 +151,10 @@ aem-crmm/
   - **Icons:** all 90, such as `:home:`, `:socialmedia-youtube-white:` or `:menu-mobile:` (`library/icons/`)
   - **Media Library:** every image and video, with where it is used
 - **Inventory:** `library/inventory` is a sheet with tabs for templates, blocks, section styles, icons, images and videos. It lists where each one is used.
+- **Site index:** `/query-index.json` lists every **published** page: path, title, image, description, robots and lastModified. It leaves out the nav, footer, `library/`, `fragments/` and `drafts/`. Pages enter it when they are published and leave it when they are unpublished, and previewed-only pages are never in it.
+  - **Configuration:** it lives in the site configuration (Admin API `config/<org>/sites/<site>/content/query.yaml`), not in the repo. A copy is in `migration-work/config/query.yaml`.
+  - **Used by:** the `article-list` block.
+  - **Check a page's entry:** `https://admin.hlx.page/index/clamunguia/aem-crmm/main/<path>`.
 
 ---
 
