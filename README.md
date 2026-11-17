@@ -187,16 +187,22 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
    ```sh
    npm run da:localize -- --urls batch.txt
    ```
-3. **Check** the pages locally against the source: blocks load, no empty blocks, no broken images.
-4. **Upload** to DA and preview. This previews the videos first, then the pages:
+3. **Point links at migrated pages.** Links to jameshardie.com pages that already exist on our site become internal links (`https://www.jameshardie.com/product-catalog/` → `/product-catalog`). Links to pages not migrated yet are left as they are.
+   ```sh
+   npm run da:relink -- --urls batch.txt   # the new pages
+   npm run da:relink -- --all              # older pages that link to the new ones
+   ```
+4. **Check** the pages locally against the source: blocks load, no empty blocks, no broken images.
+5. **Upload** to DA and preview. This previews the videos first, then the pages:
    ```sh
    npm run da:push -- --urls batch.txt --preview
    ```
-5. **Update the inventory** and upload it to DA (`content/library/inventory.json` → `library/inventory`):
+   Pages that `--all` relinked were already in DA, so `da:push` skips them. Check them, then push them with `--force`.
+6. **Update the inventory** and upload it to DA (`content/library/inventory.json` → `library/inventory`):
    ```sh
    npm run da:inventory
    ```
-6. **Review** the preview, then publish from DA or the Sidekick.
+7. **Review** the preview, then publish from DA or the Sidekick.
 
 Batch lists live in `migration-work/batches/` (local only). For example, `articles-batch-1.txt` holds the first 20 "Explore Exterior Design" articles.
 
