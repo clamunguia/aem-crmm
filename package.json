@@ -10,7 +10,8 @@
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
     "da:localize": "node tools/importer/da-sync/localize.mjs",
     "da:push": "node tools/importer/da-sync/push.mjs",
-    "da:pull": "node tools/importer/da-sync/pull.mjs"
+    "da:pull": "node tools/importer/da-sync/pull.mjs",
+    "da:inventory": "node tools/importer/da-sync/inventory.mjs"
   },
   "repository": {
     "type": "git",
