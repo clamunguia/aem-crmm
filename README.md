@@ -42,7 +42,7 @@ curl http://localhost:3000/<path>.plain.html
 | `styles/brand.css` | Design tokens: colors, fonts, sizes, layout widths. |
 | `styles/styles.css` | Global styles: typography, pill buttons, section styles. |
 | `styles/fonts.css` | Web fonts (currently system Helvetica Neue / Arial stack). |
-| `icons/*.svg` | Icons, inserted by authors as `:name:` |
+| `icons/*.svg` | 90 icons, mostly copied from `jameshardie.com/icons/` (names lowercased with hyphens). Authors insert them as `:name:`. The full list, with each icon's source URL, is in DA `library/inventory`, tab `icons`. `*-white` icons are meant for dark backgrounds. |
 | `head.html` | Tags added to every page `<head>`. |
 | `tools/importer/` | Migration tooling (not served, see `.hlxignore`). |
 | `.hlxignore` | Files that are committed but **not** served. Every other committed file is public. |
@@ -147,7 +147,7 @@ aem-crmm/
 - **Library:** the DA editor's tool panel offers:
   - **Blocks:** 17 real examples (`library/blocks/`)
   - **Templates:** Home, Blog article, Product catalog, Product page (`library/templates/`)
-  - **Icons:** `:home:`, `:durable:` and the rest (`library/icons/`)
+  - **Icons:** all 90, such as `:home:`, `:socialmedia-youtube-white:` or `:menu-mobile:` (`library/icons/`)
   - **Media Library:** every image and video, with where it is used
 - **Inventory:** `library/inventory` is a sheet with tabs for templates, blocks, section styles, icons, images and videos. It lists where each one is used.
 
