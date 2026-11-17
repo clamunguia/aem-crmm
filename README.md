@@ -176,7 +176,7 @@ The site catalog (`catalog/`, local only) groups the 294 source pages into templ
 | Template | Import script | Pages | Migrated |
 |---|---|---|---|
 | `landing-photo-hero` | `tools/importer/import-landing-photo-hero.js` | 9 | 9 |
-| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 3 |
+| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 23 |
 | `product-catalog` | `tools/importer/import-product-catalog.js` | 75 | 3 |
 | 12 smaller templates (forms, legal, sitemap…) | not created yet | 26 | 0 |
 
@@ -192,7 +192,13 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
    ```sh
    npm run da:push -- --urls batch.txt --preview
    ```
-5. **Review** the preview, then publish from DA or the Sidekick.
+5. **Update the inventory** and upload it to DA (`content/library/inventory.json` → `library/inventory`):
+   ```sh
+   npm run da:inventory
+   ```
+6. **Review** the preview, then publish from DA or the Sidekick.
+
+Batch lists live in `migration-work/batches/` (local only). For example, `articles-batch-1.txt` holds the first 20 "Explore Exterior Design" articles.
 
 `da:push` will not overwrite a page that someone changed in DA. Run `npm run da:pull -- <page>` first to bring DA's version into your workspace. It also refuses pages that still load media from another site, unless you pass `--allow-external`.
 
@@ -204,8 +210,8 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
 
 ## 7. Known gaps
 
-- **Not published yet:** the 15 migrated pages, the nav and the footer are on preview only. Live still serves the old portfolio home page, nav and footer until they are published.
-- **Remaining pages:** 287 source pages are not migrated yet: 182 articles, 72 catalog and product pages, and the 26 pages of the 12 smaller templates. Those templates need block mapping and import scripts before they can be imported.
+- **Not published yet:** the 35 migrated pages, the nav and the footer are on preview only. Live still serves the old portfolio home page, nav and footer until they are published.
+- **Remaining pages:** 260 source pages are not migrated yet: 162 articles, 72 catalog and product pages, and the 26 pages of the 12 smaller templates. Those templates need block mapping and import scripts before they can be imported.
 - **Integrations:** search, dealer locator, lead forms, chatbot and ZIP location are not migrated (see *Integrations* above). The "Do Not Sell My Personal Information" consent link is not in the footer either. The `announcement-bar` block exists but is not wired into the header.
 - **Links and documents:** links to pages that are not migrated yet still point to jameshardie.com. So do 2 PDFs linked from the footer's bottom bar: the California Supply Chain Transparency Act and the Canadian Forced Labour Report.
 
