@@ -88,8 +88,13 @@
   stroke: #007035;
 }
 
+/* caption under the image: small and muted, as on jameshardie.com (12/18, #555) */
 .image-lightbox .image-lightbox-caption {
   margin-top: 8px;
+  color: #555;
+  min-height: 36px;
+  font-size: var(--body-font-size-xs);
+  line-height: 18px;
 }
 
 .image-lightbox .image-lightbox-dialog {
@@ -150,4 +155,10 @@
 
 .image-lightbox .image-lightbox-close::after {
   transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* a single image keeps its own height, so its caption stays inside the block instead of
+   overflowing under the next heading */
+.image-lightbox .image-lightbox-list:not(.image-lightbox-multiple) .image-lightbox-media img {
+  height: auto;
 }
