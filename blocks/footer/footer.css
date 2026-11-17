@@ -81,6 +81,41 @@ footer .footer a:hover {
   text-decoration: underline;
 }
 
+/*
+ * Social links: shown as their network's icon (icons/socialmedia-*-white.svg), picked from the
+ * link's address. The link text stays in the page for screen readers. To add a network, add its
+ * domain to the list and a line with its icon below.
+ */
+footer .footer .default-content-wrapper > ul a:is(
+  [href*="youtube.com"], [href*="facebook.com"], [href*="instagram.com"],
+  [href*="pinterest.com"], [href*="houzz.com"], [href*="linkedin.com"]
+) {
+  display: block;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  background: var(--social-icon) center / contain no-repeat;
+  color: transparent;
+  text-indent: 100%;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+footer .footer .default-content-wrapper > ul a:is(
+  [href*="youtube.com"], [href*="facebook.com"], [href*="instagram.com"],
+  [href*="pinterest.com"], [href*="houzz.com"], [href*="linkedin.com"]
+):hover {
+  opacity: 0.75;
+  text-decoration: none;
+}
+
+footer .footer a[href*="youtube.com"] { --social-icon: url('../../icons/socialmedia-youtube-white.svg'); }
+footer .footer a[href*="facebook.com"] { --social-icon: url('../../icons/socialmedia-facebook-white.svg'); }
+footer .footer a[href*="instagram.com"] { --social-icon: url('../../icons/socialmedia-instagram-white.svg'); }
+footer .footer a[href*="pinterest.com"] { --social-icon: url('../../icons/socialmedia-pinterest-white.svg'); }
+footer .footer a[href*="houzz.com"] { --social-icon: url('../../icons/socialmedia-houzz-white.svg'); }
+footer .footer a[href*="linkedin.com"] { --social-icon: url('../../icons/socialmedia-linkedin-white.svg'); }
+
 footer .footer .columns > div {
   display: grid;
   grid-template-columns: 1fr;
