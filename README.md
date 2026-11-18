@@ -196,7 +196,7 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
    ```sh
    npm run da:localize -- --urls batch.txt
    ```
-4. **Point links at migrated pages.** Links to jameshardie.com pages that already exist on our site become internal links (`https://www.jameshardie.com/product-catalog/` → `/product-catalog`). Links to pages not migrated yet are left as they are.
+4. **Point links at migrated pages.** Links to jameshardie.com pages that already exist on our site become internal links (`https://www.jameshardie.com/product-catalog/` → `/product-catalog`). Site-relative links copied from the source, such as the category link `/blog/siding-durability/`, lose the trailing slash, because EDS answers 404 for a page path that ends in `/`. Links to pages not migrated yet are left as they are, so a relative one gives a 404 until that page is migrated.
    ```sh
    npm run da:relink -- --urls batch.txt   # the new pages
    npm run da:relink -- --all              # older pages that link to the new ones
