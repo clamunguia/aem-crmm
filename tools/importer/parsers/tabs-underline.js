@@ -104,7 +104,23 @@ export default function parse(element, { document }) {
   let variant = null;
   let target = element;
 
-  if (bar) {
+  // Link bar = the element holds nothing but a row of >= 2 links (each may wrap a heading), as in the
+  // product catalog's category tabs: category navigation, one row per link (label | empty panel)
+  const isLinkRow = (el) => {
+    const kids = [...el.children];
+    return kids.length >= 2 && kids.every((c) => c.tagName === 'A' && c.getAttribute('href') && clean(c.textContent));
+  };
+  const linkBar = bar ? null : [element, ...element.querySelectorAll('*')].find(isLinkRow);
+  const onlyLinks = linkBar && clean(linkBar.textContent) === clean(element.textContent);
+
+  if (onlyLinks) {
+    [...linkBar.children].forEach((link) => {
+      const a = document.createElement('a');
+      a.href = link.getAttribute('href');
+      a.textContent = clean(link.textContent);
+      cells.push([a, '']);
+    });
+  } else if (bar) {
     const buttons = [...bar.children];
     const isContentTabs = buttons.some((b) => b.querySelector('h1, h2, h3, h4, h5, h6'));
     // Panels are the bar's following siblings (one per tab, hidden ones included)

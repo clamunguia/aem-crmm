@@ -362,23 +362,14 @@ const PAGE_TEMPLATE = {
         "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20"
       ],
       "pageInstances": {
-        "https://www.jameshardie.com/product-catalog/": [
-          "#main-content > div:nth-child(2) > div.w-full.px-2.lg\\:px-20.pt-4.lg\\:pt-10.pb-10.lg\\:pb-12.md\\:py-10.bg-neutral-color-semi-pure > div > div > div"
-        ],
         "https://www.jameshardie.com/product-catalog/accessories-siding-products/hardie-colorplus-touch-up-kits/touch-up-kit/": [
           "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20"
-        ],
-        "https://www.jameshardie.com/product-catalog/all-products/": [
-          "#main-content > div:nth-child(2) > div.w-full.px-2.lg\\:px-20.pt-4.lg\\:pt-10.pb-10.lg\\:pb-12.md\\:py-10.bg-neutral-color-semi-pure > div > div > div"
         ],
         "https://www.jameshardie.com/product-catalog/backer-board-products/hardie-backer-cement-board/1-4-cement-board/": [
           "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20"
         ],
         "https://www.jameshardie.com/product-catalog/backer-board-products/hardie-backer-cement-board/42-cement-board/": [
           "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20"
-        ],
-        "https://www.jameshardie.com/product-catalog/exterior-siding-products/": [
-          "#main-content > div:nth-child(2) > div.w-full.px-2.lg\\:px-20.pt-4.lg\\:pt-10.pb-10.lg\\:pb-12.md\\:py-10.bg-neutral-color-semi-pure > div > div > div"
         ],
         "https://www.jameshardie.com/product-catalog/exterior-siding-products/hardie-architectural-panel-siding/": [
           "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20"
@@ -502,9 +493,6 @@ const PAGE_TEMPLATE = {
         "https://www.jameshardie.com/product-catalog/soffit-products/hardie-soffit-panels/ventedplus-smooth/": [
           "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20"
         ],
-        "https://www.jameshardie.com/product-catalog/trim-products/": [
-          "#main-content > div:nth-child(2) > div.w-full.px-2.lg\\:px-20.pt-4.lg\\:pt-10.pb-10.lg\\:pb-12.md\\:py-10.bg-neutral-color-semi-pure > div > div > div"
-        ],
         "https://www.jameshardie.com/product-catalog/trim-products/hardie-architectural-trim/base-trims/": [
           "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20"
         ],
@@ -549,18 +537,13 @@ const PAGE_TEMPLATE = {
     {
       "name": "accordion-faq",
       "instances": [],
-      "pageInstances": {
-        "https://www.jameshardie.com/product-catalog/": [
-          "#main-content > div:nth-child(2) > div.w-full.px-2.lg\\:px-20.pt-4.lg\\:pt-10.pb-10.lg\\:pb-12.md\\:py-10.bg-neutral-color-semi-pure > div > button"
-        ],
-        "https://www.jameshardie.com/product-catalog/all-products/": [
-          "#main-content > div:nth-child(2) > div.w-full.px-2.lg\\:px-20.pt-4.lg\\:pt-10.pb-10.lg\\:pb-12.md\\:py-10.bg-neutral-color-semi-pure > div > button"
-        ]
-      }
+      "pageInstances": {}
     },
     {
       "name": "cards-product",
-      "instances": [],
+      "instances": [
+        "#main-content > div:nth-child(2) > div.w-full.px-2.bg-neutral-color-semi-pure"
+      ],
       "pageInstances": {
         "https://www.jameshardie.com/product-catalog/accessories-siding-products/": [
           "#main-content > div:nth-child(2) > div.w-full.px-2.lg\\:px-20.pt-4.lg\\:pt-10.pb-10.lg\\:pb-12.md\\:py-10.bg-neutral-color-semi-pure"
