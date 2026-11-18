@@ -195,7 +195,7 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
    ```sh
    npm run da:clean -- --urls batch.txt
    ```
-3. **Self-host the media.** The importer leaves images and videos on jameshardie.com. Images over 20 MB are reported, so resize them before uploading:
+3. **Self-host the media.** The importer leaves images and videos on jameshardie.com. Images over 20 MB and videos over 36 MB are reported, so resize or compress them before uploading. The tool checks sizes before and during each download: it never downloads an image over 20 MB or a video over 300 MB (one source video is 5 GB). Those keep their source URL and are reported. Site-relative image paths on a source page (`/images/textures/…`) resolve against jameshardie.com.
    ```sh
    npm run da:localize -- --urls batch.txt
    ```
@@ -242,7 +242,7 @@ Batch lists live in `migration-work/batches/` (local only). For example, `articl
 
 ### Resolved
 
-- **Large videos (2026-11-17):** the 12 videos over 36 MB were compressed to 14–31 MB and now play from `shared-media/`. The tool was ffmpeg, two-pass H.264 aiming at about 32 MB, with `+faststart`. Videos up to about 90 s keep 1080p, and longer ones go to 720p. Muted background loops (`hero-video`) drop their audio track. Before/after sizes are in the `videos` tab of `library/inventory`. Use the same approach for any new video over 36 MB.
+- **Large videos (2026-11-17):** the 12 videos over 36 MB were compressed to 14–31 MB and now play from `shared-media/`. The tool was ffmpeg, two-pass H.264 aiming at about 32 MB, with `+faststart`. Videos up to about 90 s keep 1080p, and longer ones go to 720p. Muted background loops (`hero-video`) drop their audio track. Before/after sizes are in the `videos` tab of `library/inventory`. Use the same approach for any new video over 36 MB. On 2026-11-19, 10 more videos (44–184 MB, on the article-style pages) were compressed the same way to 31–32 MB. Three are too large to download and still play from the source: the Habitat for Humanity documentary (5.4 GB), the Alliance hype video (386 MB) and the Florida realtor guide video (336 MB).
 
 ---
 
