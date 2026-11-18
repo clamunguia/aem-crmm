@@ -39,7 +39,8 @@ function target(href) {
   let u;
   try { u = new URL(href); } catch { return null; }
   if (!HOSTS.has(u.host)) return null;
-  const p = decodeURIComponent(u.pathname).replace(/^\/+|\/+$/g, '');
+  // EDS page paths are lowercase: /…/vision-house-Sussex is imported as /…/vision-house-sussex
+  const p = decodeURIComponent(u.pathname).replace(/^\/+|\/+$/g, '').toLowerCase();
   if (/\.[a-z0-9]{2,5}$/i.test(p)) return null; // a file (PDF…), not a page
   const page = p || 'index';
   if (!fs.existsSync(pageFile(page))) return null;
