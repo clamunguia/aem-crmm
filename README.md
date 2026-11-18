@@ -188,7 +188,7 @@ The site catalog (`catalog/`, local only) groups the 294 source pages into templ
 Work in **batches** (for example 10–20 pages of one template). For each batch:
 
 1. **Import** the URLs with the template's import script. It writes `content/<path>.plain.html`.
-2. **Clean up** what the importer leaves behind: links with no address, such as the source's "English / Français (Canada)" language switcher.
+2. **Clean up** what the importer leaves behind: links with no address, such as the source's "English / Français (Canada)" language switcher, and links split around a ™/® superscript ("Trim-Over", "™", "Installation Method" as three links become one).
    ```sh
    npm run da:clean -- --urls batch.txt
    ```
