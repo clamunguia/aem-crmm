@@ -47,10 +47,18 @@ function slug(text) {
 
 const hash = (text) => crypto.createHash('sha1').update(text).digest('hex').slice(0, 8);
 
-/** The real asset behind a resizer URL (its url= parameter), else the URL itself. */
+/**
+ * Origin of a site-relative media path on a source page, such as
+ * /images/textures/White Birch.jpg.
+ */
+const SOURCE_ORIGIN = process.env.SOURCE_ORIGIN || 'https://www.jameshardie.com';
+const absolute = (url) => new URL(url, SOURCE_ORIGIN).href;
+
+/** The real asset behind a resizer URL (its url= parameter), else the URL itself. Absolute. */
 function innerUrl(url) {
-  const inner = new URL(url).searchParams.get('url');
-  return inner ? decodeURIComponent(inner) : url;
+  const abs = absolute(url);
+  const inner = new URL(abs).searchParams.get('url');
+  return inner ? absolute(decodeURIComponent(inner)) : abs;
 }
 
 /** Largest image the preview accepts. */
@@ -58,23 +66,53 @@ const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 
 /** URLs to try for an image, best first. */
 function imageCandidates(url) {
-  const real = innerUrl(url);
+  const abs = absolute(url);
+  const real = innerUrl(abs);
   const { host } = new URL(real);
   // Contentful: images.* and downloads.* serve the same asset; only images.* resizes it
   if (host === 'images.ctfassets.net' || host === 'downloads.ctfassets.net') {
     const base = real.split('?')[0].replace('//downloads.ctfassets.net/', '//images.ctfassets.net/');
     const isPng = /\.png$/i.test(new URL(base).pathname);
-    return [`${base}?w=2000${isPng ? '' : '&fm=jpg&q=80'}`, url];
+    return [`${base}?w=2000${isPng ? '' : '&fm=jpg&q=80'}`, abs];
   }
-  return real === url ? [url] : [url, real];
+  return real === abs ? [abs] : [abs, real];
 }
 
-async function download(candidates, accept) {
+/**
+ * Largest video we download. Bigger ones (a 5 GB documentary) would exhaust memory; they keep their
+ * source URL and are reported. Videos between 36 MB and this size are downloaded so they can be
+ * compressed (see the guide).
+ */
+const MAX_VIDEO_DOWNLOAD_BYTES = 300 * 1024 * 1024;
+
+/**
+ * Download the first candidate that answers with a known media type. Stops before (Content-Length)
+ * or during the download once a file passes maxBytes, and returns { tooLarge: bytes } instead.
+ */
+async function download(candidates, accept, maxBytes) {
   for (const candidate of candidates) {
     try {
       const res = await fetch(candidate, { headers: { Accept: accept }, redirect: 'follow' });
       if (res.ok) {
-        const buf = Buffer.from(await res.arrayBuffer());
+        const declared = Number(res.headers.get('content-length')) || 0;
+        if (declared > maxBytes) {
+          res.body?.cancel().catch(() => {});
+          return { tooLarge: declared };
+        }
+        const chunks = [];
+        let size = 0;
+        let tooLarge = false;
+        // eslint-disable-next-line no-restricted-syntax
+        for await (const chunk of res.body) {
+          size += chunk.length;
+          if (size > maxBytes) { tooLarge = true; break; }
+          chunks.push(chunk);
+        }
+        if (tooLarge) {
+          res.body?.cancel().catch(() => {});
+          return { tooLarge: size };
+        }
+        const buf = Buffer.concat(chunks);
         const kind = sniff(buf);
         if (kind) return { buf, kind };
       }
@@ -82,6 +120,8 @@ async function download(candidates, accept) {
   }
   return null;
 }
+
+const mb = (bytes) => (bytes / 1048576).toFixed(1);
 
 async function localizePage(page, dryRun) {
   const file = pageFile(page);
@@ -92,11 +132,13 @@ async function localizePage(page, dryRun) {
   const failed = [];
 
   for (const url of images.filter((u) => !isOwn(u))) {
-    const got = await download(imageCandidates(url), 'image/jpeg,image/png,image/svg+xml;q=0.9,*/*;q=0.5');
-    if (!got || !ACCEPTED_IMAGES.has(got.kind)) {
+    const got = await download(imageCandidates(url), 'image/jpeg,image/png,image/svg+xml;q=0.9,*/*;q=0.5', MAX_IMAGE_BYTES);
+    if (got?.tooLarge) {
+      failed.push({ url, reason: `image is over ${mb(got.tooLarge)} MB; the preview accepts up to 20 MB (resize it first)` });
+    } else if (!got || !ACCEPTED_IMAGES.has(got.kind)) {
       failed.push({ url, reason: got ? `unsupported image type ${got.kind}` : 'download failed' });
     } else if (got.buf.length > MAX_IMAGE_BYTES) {
-      failed.push({ url, reason: `image is ${(got.buf.length / 1048576).toFixed(1)} MB; the preview accepts up to 20 MB (resize it first)` });
+      failed.push({ url, reason: `image is ${mb(got.buf.length)} MB; the preview accepts up to 20 MB (resize it first)` });
     } else {
       const name = `${slug(path.basename(new URL(innerUrl(url)).pathname))}-${hash(url)}.${got.kind}`;
       const rel = `/media-da/${page}/${name}`;
@@ -109,13 +151,15 @@ async function localizePage(page, dryRun) {
   }
 
   for (const url of videos.filter((u) => !isOwn(u))) {
-    const got = await download([url], 'video/mp4,*/*;q=0.5');
-    if (!got || got.kind !== 'mp4') {
+    const got = await download([absolute(url)], 'video/mp4,*/*;q=0.5', MAX_VIDEO_DOWNLOAD_BYTES);
+    if (got?.tooLarge) {
+      failed.push({ url, reason: `video is over ${mb(got.tooLarge)} MB, too large to download (limit ${mb(MAX_VIDEO_DOWNLOAD_BYTES)} MB): it keeps its source URL; compress it to 36 MB or less outside this tool, or link it` });
+    } else if (!got || got.kind !== 'mp4') {
       failed.push({ url, reason: 'download failed or not an MP4' });
     } else if (got.buf.length > MAX_VIDEO_BYTES) {
-      failed.push({ url, reason: `video is ${(got.buf.length / 1048576).toFixed(1)} MB; the preview accepts up to 36 MB (compress it first)` });
+      failed.push({ url, reason: `video is ${mb(got.buf.length)} MB; the preview accepts up to 36 MB (compress it first)` });
     } else {
-      const name = `${slug(path.basename(new URL(url).pathname))}-${hash(url)}.mp4`;
+      const name = `${slug(path.basename(new URL(absolute(url)).pathname))}-${hash(url)}.mp4`;
       if (!dryRun) {
         fs.mkdirSync(path.join(CONTENT_DIR, 'shared-media'), { recursive: true });
         fs.writeFileSync(path.join(CONTENT_DIR, 'shared-media', name), got.buf);
@@ -151,6 +195,6 @@ for (const page of pages) {
   if (r.error) label = 'ERROR';
   else if (r.failed.length) label = 'WARN ';
   log(`${label} ${page}: ${r.error || `${r.localized} localized, ${r.stillExternal} still external`}`);
-  (r.failed || []).forEach((f) => log(`       - ${f.reason}: ${f.url.slice(0, 120)}`));
+  (r.failed || []).forEach((f) => log(`       - ${f.reason}: ${f.url}`));
 }
 process.exit(results.some((r) => r.error || r.failed.length) ? 1 : 0);

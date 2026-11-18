@@ -217,6 +217,11 @@ main .columns-media a.columns-media-cta:hover {
     flex: 0 0 calc(100% * 5 / 12);
   }
 
+  /* a row of text columns only (e.g. three figures): they share the width */
+  .columns-media .columns-media-row:not(:has(> .columns-media-media-col)) > .columns-media-text-col {
+    flex: 1 1 0;
+  }
+
   .columns-media .columns-media-row > .columns-media-media-col {
     flex: 0 0 50%;
     order: 0;
@@ -352,4 +357,10 @@ main .columns-media a.columns-media-cta:hover {
   flex: 0 0 32px;
   width: 32px;
   height: 32px;
+}
+
+/* in a dark or brand-green section the text takes the section's white (boxed cards keep theirs) */
+main .section:is(.dark, .brand-green) .columns-media:not(.boxed) .columns-media-text-col :is(h2, h3, h4, h5, h6, p),
+main .section:is(.dark, .brand-green) .columns-media:not(.boxed) a.columns-media-cta:any-link {
+  color: var(--color-white);
 }

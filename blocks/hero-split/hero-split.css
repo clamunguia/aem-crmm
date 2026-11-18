@@ -213,3 +213,19 @@
     display: block;
   }
 }
+
+/* in a dark or brand-green section the hero takes the section's background, with white text */
+main .section:is(.dark, .brand-green) .hero-split,
+main .section:is(.dark, .brand-green) .hero-split .hero-split-content {
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+main .section:is(.dark, .brand-green) .hero-split .hero-split-media {
+  background-image: none;
+}
+
+main .section:is(.dark, .brand-green) .hero-split .hero-split-content :is(h1, h2, h3, h4, h5, h6),
+main .section:is(.dark, .brand-green) .hero-split .hero-split-content :is(h1, h2, h3, h4, h5, h6) + p {
+  color: var(--color-white);
+}
