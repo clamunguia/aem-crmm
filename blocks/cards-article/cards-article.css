@@ -91,3 +91,9 @@
 .cards-article.buttons .cards-article-card-body {
   padding: 0;
 }
+
+/* light: article teaser titles as on the source blog index (20/24 bold) */
+.cards-article.light .cards-article-card-body h3 {
+  font-size: 20px;
+  line-height: 24px;
+}
