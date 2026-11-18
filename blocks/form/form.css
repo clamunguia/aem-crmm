@@ -56,6 +56,36 @@
   content: ' *';
 }
 
+/* text rows of a form definition (terms, notes) */
+.form .form-text p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.form .form-text p:last-child {
+  margin-bottom: 0;
+}
+
+.form .form-description {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* a single checkbox (consent) lines its box up with the first line of its text */
+.form .form-field-checkbox fieldset label {
+  align-items: flex-start;
+}
+
+.form .form-field-checkbox input[type='checkbox'] {
+  margin-top: 4px;
+}
+
+/* the consent text is long: no trailing asterisk (the box stays required) */
+.form .form-field-checkbox fieldset label.form-required::after {
+  content: none;
+}
+
 .form .form-submit {
   justify-self: start;
   margin: 8px 0 0;
@@ -79,6 +109,7 @@
   .form .form-field-textarea,
   .form .form-field-radio,
   .form .form-field-checkbox,
+  .form .form-field-plain-text,
   .form .form-submit,
   .form .form-error {
     grid-column: 1 / -1;

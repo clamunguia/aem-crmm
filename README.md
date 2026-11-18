@@ -105,7 +105,7 @@ These render the source site's UI, but the services behind them (search, dealer 
 
 | Block | Purpose |
 |---|---|
-| `form` | Lead-capture / contact form |
+| `form` | Lead-capture / contact form. Fields come from a form definition sheet (`<page>-form.json` next to the page, made with the forms importer) or from rows in the block; see `blocks/form/README.md`. First use: `/get-an-estimate` (`get-an-estimate-form.json`). **No endpoint is set yet**, so the form validates but sends nothing and says so. The source posts to Salesforce from its own page code; choose the destination (Salesforce Web-to-Lead, Marketo, or a forms service) and put its URL in the `submit` row's `Value`. |
 | `dealer-locator` | ZIP + radius dealer search |
 | `search-results` | Filterable search results |
 | `hero-search` | Contractor-finder hero |
