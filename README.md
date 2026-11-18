@@ -176,14 +176,17 @@ aem-crmm/
 
 ## 6. Migrating more pages
 
-The site catalog (`catalog/`, local only) groups the 294 source pages into templates. Import scripts exist for the three main templates:
+The site catalog (`catalog/`, local only) groups the 294 source pages into templates. Import scripts exist for the three main templates, plus one for the main blog page:
 
 | Template | Import script | Pages | Migrated |
 |---|---|---|---|
 | `landing-photo-hero` | `tools/importer/import-landing-photo-hero.js` | 9 | 9 |
-| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 23 |
-| `product-catalog` | `tools/importer/import-product-catalog.js` | 75 | 3 |
-| 12 smaller templates (forms, legal, sitemap…) | not created yet | 26 | 0 |
+| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 140 (every blog article) |
+| `product-catalog` | `tools/importer/import-product-catalog.js` | 75 | 9 (incl. the blog section index pages) |
+| `blog-home` | `tools/importer/import-blog-home.js` | 1 | 1 (`/blog`) |
+| 12 smaller templates (forms, legal, sitemap…) | not created yet | 25 | 0 |
+
+`blog-home` covers `/blog` only. The catalog puts that page in `form-left-heading` with five form pages, but it has no form: it is built from existing blocks (`hero-split`, `tabs-underline`, `cards-article`, `columns-media`, `carousel-media`), so it has its own small import script with the page's catalog selectors.
 
 Work in **batches** (for example 10–20 pages of one template). For each batch:
 

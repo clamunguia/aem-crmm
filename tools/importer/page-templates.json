@@ -6412,6 +6412,155 @@
           "#onetrust-consent-sdk"
         ]
       }
+    },
+    {
+      "name": "blog-home",
+      "description": "Main blog page (/blog): intro, featured split hero, topic navigation, latest article cards, text-image rows, Southern Living feature with photo carousel, closing call to action.",
+      "urls": [
+        "https://www.jameshardie.com/blog/"
+      ],
+      "blocks": [
+        {
+          "name": "hero-split",
+          "instances": [],
+          "pageInstances": {
+            "https://www.jameshardie.com/blog/": [
+              "#main-content > div:nth-child(2)",
+              "#main-content > div.mx-auto.relative.w-full.h-auto.max-w-screen-1440p > div.relative.pt-10.pb-12.lg\\:pt-12.lg\\:pb-16 > div.inner-container.flex.flex-col.lg\\:flex-row.items-start.lg\\:items-stretch.pb-8.lg\\:pb-4"
+            ]
+          }
+        },
+        {
+          "name": "tabs-underline",
+          "instances": [],
+          "pageInstances": {
+            "https://www.jameshardie.com/blog/": [
+              "#main-content > div.flex.flex-col.m-auto.gap-5.lg\\:gap-4.mt-16.mb-12.max-w-\\[1440px\\] > ul",
+              "#main-content > div:nth-child(4) > div > div.w-full.block.lg\\:flex.lg\\:items-center.lg\\:justify-between.pb-8.px-4.lg\\:px-20"
+            ]
+          }
+        },
+        {
+          "name": "cards-article",
+          "instances": [],
+          "pageInstances": {
+            "https://www.jameshardie.com/blog/": [
+              "#main-content > div:nth-child(4) > div > div.w-full.flex.flex-col.md\\:flex-row.gap-y-4.gap-x-6.px-4.lg\\:px-20"
+            ]
+          }
+        },
+        {
+          "name": "columns-media",
+          "instances": [],
+          "pageInstances": {
+            "https://www.jameshardie.com/blog/": [
+              "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20 > div > div.textImageItem.w-full.flex.flex-col.lg\\:flex-row.gap-6.items-center.lg\\:flex-row-reverse.justify-end",
+              "#main-content > div.inner-container.pt-10.pb-12.lg\\:pt-12.lg\\:pb-20 > div > div.textImageItem.w-full.flex.flex-col.lg\\:flex-row.gap-6.items-center.justify-between"
+            ]
+          }
+        },
+        {
+          "name": "carousel-media",
+          "instances": [],
+          "pageInstances": {
+            "https://www.jameshardie.com/blog/": [
+              "#splide01"
+            ]
+          }
+        }
+      ],
+      "sections": [
+        {
+          "id": "intro",
+          "name": "Intro heading",
+          "selector": [
+            "#main-content > div.inner-container.pt-16"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "discover",
+          "name": "Discover ideas",
+          "selector": [
+            "#main-content > div:nth-child(2)"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-split"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "topics",
+          "name": "Browse by topic",
+          "selector": [
+            "#main-content > div.flex.flex-col.m-auto"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-underline"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "latest",
+          "name": "Latest articles",
+          "selector": [
+            "#main-content > div:nth-child(4)"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-underline",
+            "cards-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "dream-home",
+          "name": "Bring your dream home to life",
+          "selector": [
+            "#main-content > div.inner-container.pt-10"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "southern-living",
+          "name": "Southern Living feature",
+          "selector": [
+            "#main-content > div.mx-auto.relative.w-full.h-auto.max-w-screen-1440p"
+          ],
+          "style": "stone",
+          "blocks": [
+            "hero-split",
+            "carousel-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "first-step",
+          "name": "Take the first step",
+          "selector": [
+            "#main-content > div.w-full.pt-10"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        }
+      ],
+      "pageCleanup": {
+        "https://www.jameshardie.com/blog/": [
+          "div.onetrust-pc-dark-filter.ot-fade-in",
+          "#onetrust-banner-sdk",
+          "#onetrust-style",
+          "#onetrust-consent-sdk"
+        ]
+      }
     }
   ],
   "metadata": {

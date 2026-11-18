@@ -13,14 +13,17 @@ export default function parse(element, { document }) {
   const heading = element.querySelector('h1, h2, h3');
 
   // Text column = child of the flex row containing the heading; media column = sibling holding img/video
+  // (or being one: an <img> can sit directly next to the text column)
+  const MEDIA = 'img, video, picture';
+  const hasMedia = (c) => c.matches(MEDIA) || !!c.querySelector(MEDIA);
   let textCol = heading;
   let row = null;
   while (textCol && textCol.parentElement && textCol.parentElement !== element) {
-    if ([...textCol.parentElement.children].some((c) => c !== textCol && c.querySelector('img, video, picture'))) break;
+    if ([...textCol.parentElement.children].some((c) => c !== textCol && hasMedia(c))) break;
     textCol = textCol.parentElement;
   }
   if (textCol) row = textCol.parentElement;
-  const mediaCol = row ? [...row.children].find((c) => c !== textCol && c.querySelector('img, video, picture')) : null;
+  const mediaCol = row ? [...row.children].find((c) => c !== textCol && hasMedia(c)) : null;
 
   // ---- text cell
   const textCell = [];
@@ -55,6 +58,12 @@ export default function parse(element, { document }) {
       });
     };
     walk(textCol);
+    // no media: a sibling column that holds only text (a description) belongs to the text cell
+    if (!mediaCol && row && textCol !== heading) {
+      [...row.children]
+        .filter((c) => c !== textCol && c.tagName === 'DIV' && c.textContent.trim() && !c.querySelector('a, button, ' + MEDIA))
+        .forEach((c) => walk(c));
+    }
   }
 
   intro.forEach((el) => {
@@ -78,8 +87,8 @@ export default function parse(element, { document }) {
   const mediaCell = [];
   let hasVideo = false;
   if (mediaCol) {
-    const video = mediaCol.querySelector('video');
-    const img = mediaCol.querySelector('img');
+    const video = mediaCol.matches('video') ? mediaCol : mediaCol.querySelector('video');
+    const img = mediaCol.matches('img') ? mediaCol : mediaCol.querySelector('img');
     if (video) {
       const source = video.getAttribute('src') || (video.querySelector('source') && video.querySelector('source').getAttribute('src'));
       const posterSrc = video.getAttribute('poster');
