@@ -4,6 +4,8 @@
  * A link such as https://www.jameshardie.com/product-catalog/ becomes /product-catalog when
  * content/product-catalog.plain.html exists in the workspace. Links to pages that are not
  * migrated yet are left as they are; run this again after each batch.
+ * Site-relative links copied from the source (/blog/siding-durability/) get the same EDS form
+ * (/blog/siding-durability): EDS answers 404 for a page path with a trailing slash.
  *
  *   node tools/importer/da-sync/relink.mjs <page|url>... [--urls <file>] [--all] [--dry-run]
  *     [--ignore-live]
@@ -34,11 +36,12 @@ function allPages(dir = CONTENT_DIR, prefix = '') {
   });
 }
 
-/** The migrated page a source URL points to: { page, to, hash }, or null. */
+/** The migrated page a source URL or site-relative link points to: { page, to, hash }, or null. */
 function target(href) {
+  const relative = href.startsWith('/') && !href.startsWith('//');
   let u;
-  try { u = new URL(href); } catch { return null; }
-  if (!HOSTS.has(u.host)) return null;
+  try { u = relative ? new URL(href, 'https://source.invalid') : new URL(href); } catch { return null; }
+  if (!relative && !HOSTS.has(u.host)) return null;
   // EDS page paths are lowercase: /…/vision-house-Sussex is imported as /…/vision-house-sussex
   const p = decodeURIComponent(u.pathname).replace(/^\/+|\/+$/g, '').toLowerCase();
   if (/\.[a-z0-9]{2,5}$/i.test(p)) return null; // a file (PDF…), not a page
@@ -85,7 +88,7 @@ for (const page of pages) {
   for (const a of main.querySelectorAll('a[href]')) {
     const href = a.getAttribute('href');
     const t = target(href);
-    if (!t) continue; // eslint-disable-line no-continue
+    if (!t || t.to === href) continue; // eslint-disable-line no-continue
     if (pageIsLive && !(await isLive(t.page))) {
       held.push(t.to);
       continue; // eslint-disable-line no-continue
