@@ -183,26 +183,31 @@ The site catalog (`catalog/`, local only) groups the 294 source pages into templ
 Work in **batches** (for example 10–20 pages of one template). For each batch:
 
 1. **Import** the URLs with the template's import script. It writes `content/<path>.plain.html`.
-2. **Self-host the media.** The importer leaves images and videos on jameshardie.com:
+2. **Clean up** what the importer leaves behind: links with no address, such as the source's "English / Français (Canada)" language switcher.
+   ```sh
+   npm run da:clean -- --urls batch.txt
+   ```
+3. **Self-host the media.** The importer leaves images and videos on jameshardie.com. Images over 20 MB are reported, so resize them before uploading:
    ```sh
    npm run da:localize -- --urls batch.txt
    ```
-3. **Point links at migrated pages.** Links to jameshardie.com pages that already exist on our site become internal links (`https://www.jameshardie.com/product-catalog/` → `/product-catalog`). Links to pages not migrated yet are left as they are.
+4. **Point links at migrated pages.** Links to jameshardie.com pages that already exist on our site become internal links (`https://www.jameshardie.com/product-catalog/` → `/product-catalog`). Links to pages not migrated yet are left as they are.
    ```sh
    npm run da:relink -- --urls batch.txt   # the new pages
    npm run da:relink -- --all              # older pages that link to the new ones
    ```
-4. **Check** the pages locally against the source: blocks load, no empty blocks, no broken images.
-5. **Upload** to DA and preview. This previews the videos first, then the pages:
+5. **Check** the pages locally against the source: blocks load, no empty blocks, no broken images.
+6. **Upload** to DA and preview. This previews the videos first, then the pages:
    ```sh
    npm run da:push -- --urls batch.txt --preview
    ```
    Pages that `--all` relinked were already in DA, so `da:push` skips them. Check them, then push them with `--force`.
-6. **Update the inventory** and upload it to DA (`content/library/inventory.json` → `library/inventory`):
+   After the preview, make sure no image came out as `about:error` (the preview could not fetch it). If one did, preview that page again before publishing.
+7. **Update the inventory** and upload it to DA (`content/library/inventory.json` → `library/inventory`):
    ```sh
    npm run da:inventory
    ```
-7. **Review** the preview, then publish from DA or the Sidekick.
+8. **Review** the preview, then publish from DA or the Sidekick.
 
 Batch lists live in `migration-work/batches/` (local only). For example, `articles-batch-1.txt` holds the first 20 "Explore Exterior Design" articles.
 
