@@ -6,14 +6,22 @@
  * migrated yet are left as they are; run this again after each batch.
  *
  *   node tools/importer/da-sync/relink.mjs <page|url>... [--urls <file>] [--all] [--dry-run]
+ *     [--ignore-live]
  *
- * --all     every site page in the workspace (not the library)
+ * --all          every site page in the workspace (not the library)
+ * Live safety:   a page that is already published only gets links to pages that are published
+ *                too, so publishing it never creates a 404. Its other links are reported as
+ *                "waiting" and get converted on a later run, once their target is published.
+ *                --ignore-live skips this check (no network calls).
+ * Anchors:       a link to #section whose target has no element with that id is converted but
+ *                reported, because the importer renames ids from heading text.
  * Settings: SOURCE_HOSTS, comma-separated, default "www.jameshardie.com,jameshardie.com".
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-  CONTENT_DIR, pagesFromArgs, flag, pageFile, readMain, writeMain, log,
+  CONTENT_DIR, ADMIN, ORG, SITE, REF, authHeaders, pagesFromArgs, flag, pageFile, readMain,
+  writeMain, log,
 } from './lib.mjs';
 
 const HOSTS = new Set((process.env.SOURCE_HOSTS || 'www.jameshardie.com,jameshardie.com').split(',').map((h) => h.trim()));
@@ -26,42 +34,72 @@ function allPages(dir = CONTENT_DIR, prefix = '') {
   });
 }
 
-/** The local path for a source URL when that page is migrated, else null. */
-function localPath(href) {
+/** The migrated page a source URL points to: { page, to, hash }, or null. */
+function target(href) {
   let u;
   try { u = new URL(href); } catch { return null; }
   if (!HOSTS.has(u.host)) return null;
   const p = decodeURIComponent(u.pathname).replace(/^\/+|\/+$/g, '');
   if (/\.[a-z0-9]{2,5}$/i.test(p)) return null; // a file (PDF…), not a page
-  if (!fs.existsSync(pageFile(p || 'index'))) return null;
-  return `/${p}${u.search}${u.hash}`;
+  const page = p || 'index';
+  if (!fs.existsSync(pageFile(page))) return null;
+  return { page, to: `/${p}${u.search}${u.hash}`, hash: u.hash.slice(1) };
 }
 
+const liveCache = new Map();
+/** True when the page is published (live), from the admin status API. */
+async function isLive(page) {
+  if (!liveCache.has(page)) {
+    const web = page === 'index' ? '' : page;
+    liveCache.set(page, fetch(`${ADMIN}/status/${ORG}/${SITE}/${REF}/${web}`, { headers: authHeaders() })
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((s) => s.live?.status === 200)
+      .catch(() => false));
+  }
+  return liveCache.get(page);
+}
+
+const hasId = (page, id) => fs.readFileSync(pageFile(page), 'utf8').includes(`id="${id}"`);
+
 const args = process.argv.slice(2);
+const checkLive = !flag(args, '--ignore-live');
 const pages = flag(args, '--all') ? allPages() : pagesFromArgs(args);
 if (!pages.length) {
-  log('Usage: node tools/importer/da-sync/relink.mjs <page|url>... [--urls <file>] [--all] [--dry-run]');
+  log('Usage: node tools/importer/da-sync/relink.mjs <page|url>... [--urls <file>] [--all] [--dry-run] [--ignore-live]');
   process.exit(2);
 }
 let total = 0;
-pages.forEach((page) => {
+let waiting = 0;
+for (const page of pages) {
   const file = pageFile(page);
   if (!fs.existsSync(file)) {
     log(`ERROR    ${page}: page not found in content/`);
-    return;
+    continue; // eslint-disable-line no-continue
   }
   const main = readMain(file);
+  const pageIsLive = checkLive && await isLive(page);
   const changes = [];
-  main.querySelectorAll('a[href]').forEach((a) => {
+  const held = [];
+  const anchors = [];
+  for (const a of main.querySelectorAll('a[href]')) {
     const href = a.getAttribute('href');
-    const to = localPath(href);
-    if (!to) return;
-    a.setAttribute('href', to);
-    if (a.textContent.trim() === href) a.textContent = to;
-    changes.push(to);
-  });
+    const t = target(href);
+    if (!t) continue; // eslint-disable-line no-continue
+    if (pageIsLive && !(await isLive(t.page))) {
+      held.push(t.to);
+      continue; // eslint-disable-line no-continue
+    }
+    if (t.hash && !hasId(t.page, t.hash)) anchors.push(t.to);
+    a.setAttribute('href', t.to);
+    if (a.textContent.trim() === href) a.textContent = t.to;
+    changes.push(t.to);
+  }
   total += changes.length;
+  waiting += held.length;
   if (changes.length && !flag(args, '--dry-run')) writeMain(file, main);
-  log(`${changes.length ? 'RELINKED' : 'OK      '} ${page}: ${changes.length} link(s)${changes.length ? ` → ${[...new Set(changes)].join(', ')}` : ''}`);
-});
-log(`total: ${total} link(s)${flag(args, '--dry-run') ? ' (dry run)' : ''}`);
+  const label = changes.length ? 'RELINKED' : 'OK      ';
+  log(`${label} ${page}: ${changes.length} link(s)${changes.length ? ` → ${[...new Set(changes)].join(', ')}` : ''}`);
+  if (held.length) log(`  WAITING  ${held.length} link(s) to pages not published yet (this page is live): ${[...new Set(held)].join(', ')}`);
+  if (anchors.length) log(`  CHECK    anchor not found on the target page: ${[...new Set(anchors)].join(', ')}`);
+}
+log(`total: ${total} link(s)${waiting ? `, ${waiting} waiting for their target to be published` : ''}${flag(args, '--dry-run') ? ' (dry run)' : ''}`);

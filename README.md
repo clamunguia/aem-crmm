@@ -201,6 +201,7 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
    npm run da:relink -- --urls batch.txt   # the new pages
    npm run da:relink -- --all              # older pages that link to the new ones
    ```
+   **Safe for live pages:** a page that is already published only gets links to pages that are published too. Its other links are listed as `WAITING` and get converted on a later run, after their target is published. Run `da:relink -- --all` again after each publish. `CHECK` flags a link to a `#section` the target page doesn't have, because the importer renames section ids from their headings. Point it at the right id by hand.
 5. **Check** the pages locally against the source: blocks load, no empty blocks, no broken images.
 6. **Upload** to DA and preview. This previews the videos first, then the pages:
    ```sh
@@ -212,7 +213,12 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
    ```sh
    npm run da:inventory
    ```
-8. **Review** the preview, then publish from DA or the Sidekick.
+8. **Review** the preview, then publish from DA or the Sidekick, **in this order**:
+   1. **The new pages first.** Until they are live, any link to them 404s on the live site.
+   2. **Then the older pages that link to them** (the ones `--all` relinked). Run `npm run da:relink -- --all` once more first: links that were `WAITING` for these new pages are converted now. Push those pages with `--force --preview`, then publish them.
+   3. **Section index pages** (`article-list`) need no republish. Their list reads the site index, which updates by itself when an article is published or unpublished.
+
+   To check a page is live before linking to it: `https://admin.hlx.page/status/clamunguia/aem-crmm/main/<path>` (`live.status` 200).
 
 Batch lists live in `migration-work/batches/` (local only). For example, `articles-batch-1.txt` holds the first 20 "Explore Exterior Design" articles.
 
