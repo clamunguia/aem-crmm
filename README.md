@@ -225,6 +225,20 @@ Work in **batches** (for example 10–20 pages of one template). For each batch:
    3. **Section index pages** (`article-list`) need no republish. Their list reads the site index, which updates by itself when an article is published or unpublished.
 
    To check a page is live before linking to it: `https://admin.hlx.page/status/clamunguia/aem-crmm/main/<path>` (`live.status` 200).
+9. **Update the redirects** once the batch is live, then upload `content/redirects.json` to DA as `/redirects` and publish it:
+   ```sh
+   npm run da:redirects
+   ```
+
+### Redirects
+
+Every source URL ends in `/` (`/faq/`), and EDS answers 404 for a page path with a trailing slash. Before the jameshardie.com domain points at EDS, the old URLs must redirect (301) to the new ones. Otherwise links from search engines, emails and other sites break, and pages lose their search ranking.
+
+- `da:redirects` builds `content/redirects.json` (the EDS redirects sheet, columns `Source` and `Destination`):
+  - Every catalog URL whose page is published maps to its EDS path, without the trailing slash and in lowercase (`/blog/…/vision-house-Sussex/` → `…-sussex`).
+  - It adds the lines of `tools/importer/da-sync/redirects-extra.txt` whose new path is published, in both slash forms. These are old paths the source site already redirects (`/prosHub`, `/term-conditions/`…) and blog category paths that do not exist.
+  - The run stops if a `Source` is itself a published page, or if a `Destination` is not published.
+- The sheet only covers paths it lists. A rule at the CDN in front of the domain that drops the trailing slash from any path covers the rest, including pages outside the catalog. Use both.
 
 Batch lists live in `migration-work/batches/` (local only). For example, `articles-batch-1.txt` holds the first 20 "Explore Exterior Design" articles.
 
