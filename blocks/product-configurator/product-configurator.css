@@ -310,6 +310,60 @@
   color: var(--color-gray-text);
 }
 
+/*
+ * Colour choices as built by the previous version of the block (a chip span inside the choice):
+ * a browser that still has that script cached gets this stylesheet's dots too.
+ * Safe to remove once caches have expired (a few days after 2026-11-19).
+ */
+.product-configurator .product-configurator-choice.product-configurator-choice-color {
+  position: relative;
+  box-sizing: border-box;
+  width: 40px;
+  min-width: 0;
+  max-width: none;
+  height: 40px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: var(--color-beige);
+  box-shadow: none;
+}
+
+.product-configurator .product-configurator-choice.product-configurator-choice-color[aria-checked='true'] {
+  border-color: var(--color-green);
+}
+
+.product-configurator .product-configurator-choice.product-configurator-choice-color .product-configurator-color {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--chip);
+}
+
+.product-configurator .product-configurator-choice.product-configurator-choice-color .product-configurator-choice-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  z-index: 2;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--color-white);
+  box-shadow: 0 1px 2px 0 rgb(51 51 51 / 6%), 0 1px 3px 0 rgb(51 51 51 / 10%);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.product-configurator .product-configurator-choice.product-configurator-choice-color:is(:hover, :focus-visible) .product-configurator-choice-label {
+  opacity: 1;
+}
+
 /* summary card: a trailing group with one plain choice (selected colour + sample CTA) */
 .product-configurator .product-configurator-group:last-child:not(:only-child):has(> .product-configurator-choices > .product-configurator-choice:only-child:not(.product-configurator-choice-swatch)) {
   align-items: center;
