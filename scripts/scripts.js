@@ -167,6 +167,25 @@ function decorateSectionMetadata(main) {
 }
 
 /**
+ * Marks the page's legal notes. The source ends many pages with notes (*Based on Freedonia…),
+ * imported as dark sections of plain paragraphs. The dark text-only sections that end the page
+ * (after any empty ones) get the "footnotes" class: one compact band of small notes that runs
+ * into the footer, as on the source.
+ * @param {Element} main The main element
+ */
+function decorateFootnotes(main) {
+  const sections = [...main.querySelectorAll(':scope > .section')]
+    .filter((s) => s.textContent.trim() || s.querySelector('picture, img, video, iframe'));
+  for (let i = sections.length - 1; i >= 0; i -= 1) {
+    const section = sections[i];
+    // runs before decorateBlocks: a block is any wrapper other than the default-content one
+    const textOnly = !section.querySelector('h1, h2, h3, h4, h5, h6, picture, img, :scope > div:not(.default-content-wrapper)');
+    if (!section.classList.contains('dark') || !textOnly) break;
+    section.classList.add('footnotes');
+  }
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -176,6 +195,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSectionMetadata(main);
   decorateSections(main);
+  decorateFootnotes(main);
   decorateBlocks(main);
   decorateButtons(main);
 }

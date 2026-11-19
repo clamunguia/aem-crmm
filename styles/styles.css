@@ -305,6 +305,35 @@ main .section.brand-green a.button.secondary {
   color: var(--color-white);
 }
 
+/* a section left empty (it only held the page metadata) takes no space */
+main > .section:empty {
+  display: none;
+}
+
+/*
+ * legal notes at the end of the page (scripts.js marks them "footnotes"): one compact band of
+ * small notes that runs into the footer, as on the source
+ */
+main .section.dark.footnotes {
+  padding: 8px 0;
+  color: rgb(255 255 255 / 70%);
+  font-size: var(--body-font-size-xs);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+main .section.footnotes p {
+  margin: 0;
+}
+
+main .section:not(.footnotes) + .section.dark.footnotes {
+  padding-top: 40px;
+}
+
+main .section.dark.footnotes:not(:has(~ .section.footnotes)) {
+  padding-bottom: 24px;
+}
+
 main .section.dark a.button.secondary:hover,
 main .section.brand-green a.button.secondary:hover {
   background-color: var(--color-white);
