@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -113,6 +113,19 @@ export default async function decorate(block) {
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
+  }
+
+  // a tools link to /search becomes a magnifying-glass icon (its text stays for screen readers)
+  const navTools = nav.querySelector('.nav-tools');
+  const searchLink = navTools && [...navTools.querySelectorAll('a[href]')]
+    .find((a) => new URL(a.href, window.location.href).pathname.replace(/\/$/, '') === '/search');
+  if (searchLink) {
+    const label = searchLink.textContent.trim() || 'Search';
+    searchLink.className = 'nav-search';
+    searchLink.closest('.button-container')?.classList.remove('button-container');
+    searchLink.setAttribute('aria-label', label);
+    searchLink.innerHTML = '<span class="icon icon-search"></span>';
+    decorateIcons(searchLink);
   }
 
   const navSections = nav.querySelector('.nav-sections');
