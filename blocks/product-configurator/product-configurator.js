@@ -12,10 +12,66 @@
  *   Rows with a single cell after the groups are CTAs / notes.
  * The selected value is shown next to each group title and exposed on the
  * block as data-<group>="<value>" and a `product-option-change` event.
+ * Colour choices named in the /colors sheet (Name, Color, Param) get a colour chip; choosing one
+ * paints the transparent siding of the preview and texture images and sets ?color=<Param>.
  * Option: alt (overview with available products and dealer CTA).
  */
 import { optimizeImages, isMediaCell } from '../../scripts/block-utils.js';
 import { toClassName } from '../../scripts/aem.js';
+
+/**
+ * Siding colours, from the /colors sheet (columns Name, Color, Param). The preview and texture
+ * images are PNGs whose siding is transparent: the chosen colour shows through as their
+ * background (--siding-color), as on the source.
+ */
+async function loadColors() {
+  try {
+    const resp = await fetch('/colors.json');
+    if (!resp.ok) return new Map();
+    const json = await resp.json();
+    return new Map((json.data || []).filter((r) => r.Name && r.Color).map((r) => [
+      r.Name.trim().toLowerCase(),
+      { color: r.Color.trim(), param: (r.Param || toClassName(r.Name)).trim() },
+    ]));
+  } catch {
+    return new Map();
+  }
+}
+
+/** Colour chips on the colour choices; selecting one paints the siding and sets ?color=. */
+function applyColors(block, colors) {
+  // only the first group with colour choices ("Select a color"): later groups repeat the names
+  const isColor = (el) => colors.has(el.dataset.value.toLowerCase());
+  const group = [...block.querySelectorAll('.product-configurator-group')]
+    .find((g) => [...g.querySelectorAll('.product-configurator-choice[role="radio"]')].some(isColor));
+  if (!group) return;
+  const choices = [...group.querySelectorAll('.product-configurator-choice[role="radio"]')].filter(isColor);
+  choices.forEach((el) => {
+    const { color } = colors.get(el.dataset.value.toLowerCase());
+    const chip = document.createElement('span');
+    chip.className = 'product-configurator-color';
+    chip.style.setProperty('--chip', color);
+    el.prepend(chip);
+    el.classList.add('product-configurator-choice-color');
+  });
+  const paint = (name, updateUrl) => {
+    const entry = colors.get(name.toLowerCase());
+    if (!entry) return;
+    block.style.setProperty('--siding-color', entry.color);
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('color', entry.param);
+      window.history.replaceState(null, '', url);
+    }
+  };
+  choices.forEach((el) => el.addEventListener('click', () => paint(el.dataset.value, true)));
+  // first colour: the one in ?color=, else the preselected one
+  const wanted = new URLSearchParams(window.location.search).get('color');
+  const fromUrl = wanted
+    && choices.find((el) => colors.get(el.dataset.value.toLowerCase()).param === wanted);
+  if (fromUrl) fromUrl.click();
+  else paint((choices.find((el) => el.getAttribute('aria-checked') === 'true') || choices[0]).dataset.value, false);
+}
 
 function choiceElements(cells) {
   const list = cells.find((c) => c.querySelector(':scope > ul, :scope > ol'));
@@ -111,7 +167,8 @@ function buildGroup(titleCell, choiceCells, block, setPreview) {
   return { group, firstRadio };
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  const colorsLoaded = loadColors();
   const rows = [...block.children];
   const preview = document.createElement('div');
   preview.className = 'product-configurator-preview';
@@ -165,4 +222,7 @@ export default function decorate(block) {
     groupEl.querySelector('.product-configurator-group-value').textContent = radio.dataset.value;
     radio.setAttribute('aria-checked', 'true');
   });
+
+  const colors = await colorsLoaded;
+  if (colors.size) applyColors(block, colors);
 }
