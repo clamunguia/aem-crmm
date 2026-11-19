@@ -181,10 +181,13 @@ The site catalog (`catalog/`, local only) groups the 294 source pages into templ
 | Template | Import script | Pages | Migrated |
 |---|---|---|---|
 | `landing-photo-hero` | `tools/importer/import-landing-photo-hero.js` | 9 | 9 |
-| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 140 (every blog article) |
-| `product-catalog` | `tools/importer/import-product-catalog.js` | 75 | 9 (incl. the blog section index pages) |
+| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 177 (blog articles and the article-style pages without forms) |
+| `product-catalog` | `tools/importer/import-product-catalog.js` | 75 | 71 (product pages and the blog section index pages) |
 | `blog-home` | `tools/importer/import-blog-home.js` | 1 | 1 (`/blog`) |
-| 12 smaller templates (forms, legal, sitemap…) | not created yet | 25 | 0 |
+| `small-pages` | `tools/importer/import-small-pages.js` | 18 | 18 (the small templates' pages without forms) |
+| Pages with forms (Marketo, search, dealer locator) | not created yet | ~15 | 1 (`/get-an-estimate`, see the `form` block) |
+
+`small-pages` covers the 18 pages without forms of the ten small catalog templates (legal pages, sitemap, FAQ, safety resources, Why James Hardie sub-pages and some landings). They have no import script of their own. This one uses each page's catalog block selectors (`pageInstances`) for blocks with a parser, plus the generic section rules of `landing-photo-hero`. Three rules from the other templates fix the catalog's labels: text cards in a `.cards-container` are `cards-feature`, an `<ol>` of figures is `columns-stats`, and a `hero-split` with no heading is a `quote`. Consecutive `accordion-faq` blocks are joined, so the FAQ has one accordion per category. The notes at the top of the script explain how its `PAGE_TEMPLATE` was built from the catalog; to add a page, build its entries the same way rather than writing selectors by hand.
 
 `blog-home` covers `/blog` only. The catalog puts that page in `form-left-heading` with five form pages, but it has no form: it is built from existing blocks (`hero-split`, `tabs-underline`, `cards-article`, `columns-media`, `carousel-media`), so it has its own small import script with the page's catalog selectors.
 
