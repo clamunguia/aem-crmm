@@ -86,7 +86,12 @@ Every block's JS starts with a comment describing its authoring structure and op
 | `author-bio` | Blog author name and bio |
 | `table-plain` | Plain data table |
 | `accordion-faq` | Expandable question / answer rows |
-| `product-configurator` | Product panel: image, name, intro, texture / colour pickers. The house and texture images are PNGs with transparent siding. The colour list comes from the `/colors` sheet (columns `Name`, `Color` as a hex value, `Param`). Picking a colour shows a chip, paints the siding with that colour and sets `?color=<Param>`, so the link opens with the same colour. To add or change a colour, edit the sheet; the product pages don't need republishing. The local copy is `content/colors.json`. |
+| `product-configurator` | Product panel: image, name, intro, texture / colour pickers. The house and texture images are PNGs with transparent siding. The colours come from the `/colors` sheet (columns `Name`, `Color` as a hex value, `Param`, `Collection`, `Family`):
+- Rows with an empty `Family` are the Statement Collection®. Each colour choice named there shows a chip.
+- Rows with a `Family` (green, brown…) are the Dream Collection®, 686 colours. A group whose choices are family names becomes a family filter. It shows that family's colour dots (with the name on hover) and a "Find colors by name" search within the family, as on the source.
+- Picking a colour paints the siding and sets `?color=<Param>` (and `?family=` for Dream), so the link opens with the same colour. To add or change a colour, edit the sheet; the product pages don't need republishing. The local copy is `content/colors.json`.
+
+Texture choices link to their texture page (for example Hardie® Panel → `/…/hardie-panel-siding/stucco`). A click loads that page's configurator in place and updates the address, keeping `?color=`. That is how a Dream-only texture such as Stucco brings its own colours. On a texture page its own texture is marked as selected. |
 | `product-specs` | Spec accordion beside an install-resources sidebar |
 
 ### Built for pages not migrated yet
