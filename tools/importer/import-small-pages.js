@@ -1,5 +1,21 @@
 /* eslint-disable */
 /* global WebImporter */
+/*
+ * Import script for the "small-pages" template: the 18 pages without forms of the ten small catalog
+ * templates (minimal-utility, dark-banner-landing, photo-intro-resources, sidebar-two-column,
+ * sidebar-text, video-hero-landing, docs-library, text-intro, sitemap, legal-sidebar) plus
+ * /terms-conditions-purchase/.
+ * PAGE_TEMPLATE was built from the catalog, not by hand:
+ *  - blocks: for each page, the catalog blocks (catalog/.pages/<page>/page-catalog.json, `variantId`
+ *    -> catalog/block-catalog.json variant name) that have a parser, as pageInstances. Three
+ *    catalog labels are corrected with the rules the other templates use: text cards in a
+ *    .cards-container -> cards-feature; an <ol> of figure items -> columns-stats (on the <ol>);
+ *    a hero-split with no heading -> quote.
+ *  - sections: the generic section rules of landing-photo-hero.
+ *  - pageCleanup: each page's catalog removals (cookie banner, overlays).
+ * mergeAdjacentBlocks() joins consecutive accordion-faq tables (the catalog captured one block per
+ * FAQ question). Orchestration is the same as import-product-catalog.js.
+ */
 
 import accordionFaqParser from './parsers/accordion-faq.js';
 import cardsArticleParser from './parsers/cards-article.js';
