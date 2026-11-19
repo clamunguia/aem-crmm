@@ -264,6 +264,11 @@ header nav .nav-sections .nav-drop > ul.nav-drop-groups > li.nav-group > ul {
     margin: 0;
   }
 
+  /* the menu bar: grouped dropdowns (mega menus) are placed against it */
+  header nav .nav-sections .default-content-wrapper > ul {
+    position: relative;
+  }
+
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 0 auto;
     position: relative;
@@ -304,11 +309,19 @@ header nav .nav-sections .nav-drop > ul.nav-drop-groups > li.nav-group > ul {
     padding: 8px 0;
   }
 
-  /* grouped dropdown: one column per group, aligned to the right edge of the last menu */
+  /*
+   * grouped dropdown (mega menu): one column per group, placed against the menu bar so three
+   * columns fit at any desktop width: from the bar's left edge, or its right edge for the last menu
+   */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega {
+    position: static;
+  }
+
   header nav .nav-sections .default-content-wrapper > ul > li > button[aria-expanded='true'] + ul.nav-drop-groups {
     display: flex;
     gap: 48px;
     width: auto;
+    top: calc(100% + 12px);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li:last-child > button[aria-expanded='true'] + ul.nav-drop-groups {
@@ -316,9 +329,9 @@ header nav .nav-sections .nav-drop > ul.nav-drop-groups > li.nav-group > ul {
     left: auto;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:last-child > ul.nav-drop-groups::before {
-    right: 32px;
-    left: auto;
+  /* the arrow pointed at the label; against the bar it would point elsewhere */
+  header nav .nav-sections .default-content-wrapper > ul > li > ul.nav-drop-groups::before {
+    display: none;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul.nav-drop-groups > li.nav-group {

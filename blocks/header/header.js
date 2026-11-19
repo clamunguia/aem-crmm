@@ -134,6 +134,8 @@ export default async function decorate(block) {
       const groups = [...subList.children].filter((li) => li.querySelector(':scope > ul'));
       if (groups.length) {
         subList.classList.add('nav-drop-groups');
+        // its dropdown is placed against the whole menu bar, not under its label (see CSS)
+        navSection.classList.add('nav-drop-mega');
         groups.forEach((li) => {
           li.classList.add('nav-group');
           const title = [...li.children].find((c) => c.tagName !== 'UL');
