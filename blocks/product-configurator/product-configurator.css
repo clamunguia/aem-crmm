@@ -195,54 +195,110 @@
   object-fit: fill;
 }
 
-/* Dream Collection®: family filter, search by name, colour dots */
-.product-configurator .product-configurator-group-selected {
-  font-weight: 400;
-}
-
+/* Dream Collection®: family filter (dot + name), search by name, colour dots */
 .product-configurator .product-configurator-group-dream .product-configurator-choices {
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
   overflow: visible;
 }
 
-.product-configurator .product-configurator-group-dream .product-configurator-choice {
+.product-configurator .product-configurator-group-dream .product-configurator-choice.product-configurator-family {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
   max-width: none;
   margin: 0;
-  padding: 6px 16px;
-  border-radius: var(--radius-pill);
-  text-transform: capitalize;
+  padding: 4px 8px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.product-configurator .product-configurator-group-dream .product-configurator-choice.product-configurator-family[aria-checked='true'] {
+  border-color: var(--color-green);
+  box-shadow: 0 2px 4px -2px rgb(51 51 51 / 6%), 0 4px 8px -2px rgb(51 51 51 / 10%);
+}
+
+.product-configurator .product-configurator-family-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--chip);
+}
+
+.product-configurator .product-configurator-choice.product-configurator-family .product-configurator-choice-label {
+  font-size: var(--body-font-size-m);
+  line-height: 22px;
+}
+
+.product-configurator .product-configurator-choice.product-configurator-family .product-configurator-choice-label::first-letter {
+  text-transform: uppercase;
 }
 
 .product-configurator .product-configurator-search {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.product-configurator .product-configurator-search-field {
+  position: relative;
+  width: 100%;
+  color: var(--color-charcoal);
+}
+
+.product-configurator .product-configurator-search-field svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  margin: auto;
+  pointer-events: none;
 }
 
 .product-configurator .product-configurator-search input {
   box-sizing: border-box;
   width: 100%;
-  max-width: 360px;
-  height: 44px;
-  padding: 0 16px;
-  border: 1px solid var(--color-gray-text);
-  border-radius: var(--radius-pill);
+  height: 41px;
+  padding: 8px 8px 8px 40px;
+  border: 0;
+  border-bottom: 1px solid rgb(130 112 94);
+  border-radius: 0;
   background: var(--color-white);
   color: var(--color-charcoal);
   font: inherit;
   font-size: var(--body-font-size-m);
+  line-height: 24px;
+  outline: none;
+  transition: background-color 0.15s, border-color 0.15s;
 }
 
-.product-configurator .product-configurator-search input:focus-visible {
-  outline: 2px solid var(--color-green);
-  outline-offset: 2px;
+.product-configurator .product-configurator-search input::placeholder {
+  color: rgb(156 163 175);
+}
+
+.product-configurator .product-configurator-search input:is(:hover, :focus) {
+  background-color: rgb(130 112 94 / 5%);
+}
+
+.product-configurator .product-configurator-search input:focus {
+  border-bottom: 2px solid var(--color-green);
+}
+
+.product-configurator .product-configurator-search-hint {
+  margin: 0;
+  padding-left: 16px;
+  color: var(--color-gray-text);
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .product-configurator .product-configurator-search-clear {
-  padding: 0;
+  padding: 0 0 0 16px;
   border: 0;
   background: none;
   color: var(--color-green);
@@ -502,6 +558,11 @@
 
   .product-configurator .product-configurator-choices:not(:has(.product-configurator-choice-swatch)) {
     gap: 32px;
+  }
+
+  /* Dream family buttons: 16px apart, two rows, as on the source */
+  .product-configurator .product-configurator-group-dream .product-configurator-choices.product-configurator-families {
+    gap: 16px;
   }
 
   .product-configurator .product-configurator-group:last-child:not(:only-child):has(> .product-configurator-choices > .product-configurator-choice:only-child:not(.product-configurator-choice-swatch)) {

@@ -26,6 +26,23 @@ import { toClassName } from '../../scripts/aem.js';
 
 let colorsLoaded;
 
+/** Dream Collection® family dot colours, from the source's family buttons. */
+const FAMILY_COLORS = {
+  green: '#367260',
+  brown: '#604941',
+  gray: '#838382',
+  purple: '#748199',
+  blue: '#306489',
+  neutral: '#968567',
+  white: '#E3DED1',
+  black: '#434447',
+  yellow: '#C4965D',
+  red: '#7E4D45',
+  orange: '#E0C0A0',
+};
+
+const SEARCH_ICON = '<svg aria-hidden="true" focusable="false" width="17" height="16" viewBox="0 0 17 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.48 12.18c2.8-1.18 4.1-4.38 2.91-7.16C11.2 2.25 7.97.96 5.18 2.14 2.39 3.31 1.08 6.52 2.27 9.29c1.19 2.78 4.42 4.07 7.21 2.89Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m11.22 11.02 4.26 4.23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
 /**
  * Siding colours, from the /colors sheet. The preview and texture images are PNGs whose siding
  * is transparent: the chosen colour shows through as their background (--siding-color).
@@ -112,23 +129,36 @@ function applyDream(block, dream) {
   group.classList.add('product-configurator-group-dream');
   const radios = [...group.querySelectorAll('.product-configurator-choice[role="radio"]')];
   const value = group.querySelector('.product-configurator-group-value');
-  const title = group.querySelector('.product-configurator-group-title');
-  const shown = document.createElement('span');
-  shown.className = 'product-configurator-group-selected';
-  title.firstChild.after(shown);
+  // each family button: a small dot of the family's colour before its name, as on the source
+  radios.forEach((el) => {
+    const fam = familyOf(el);
+    const dot = document.createElement('span');
+    dot.className = 'product-configurator-family-dot';
+    dot.style.setProperty('--chip', FAMILY_COLORS[fam] || dream.find((c) => c.family === fam).color);
+    el.prepend(dot);
+    el.classList.add('product-configurator-family');
+  });
+  group.querySelector('.product-configurator-choices').classList.add('product-configurator-families');
 
   const search = document.createElement('div');
   search.className = 'product-configurator-search';
+  const field = document.createElement('div');
+  field.className = 'product-configurator-search-field';
+  field.innerHTML = SEARCH_ICON;
   const input = document.createElement('input');
   input.type = 'search';
   input.placeholder = 'Find colors by name';
   input.setAttribute('aria-label', 'Find colors by name');
+  field.append(input);
+  const hint = document.createElement('p');
+  hint.className = 'product-configurator-search-hint';
+  hint.textContent = 'Search by color name. E.g. "Linden Green"';
   const clear = document.createElement('button');
   clear.type = 'button';
   clear.className = 'product-configurator-search-clear';
   clear.textContent = 'Clear color filter';
   clear.hidden = true;
-  search.append(input, clear);
+  search.append(field, hint, clear);
 
   const dots = document.createElement('div');
   dots.className = 'product-configurator-dots';
@@ -145,7 +175,6 @@ function applyDream(block, dream) {
 
   const select = (entry) => {
     selected = entry;
-    shown.textContent = `: ${entry.name}`;
     value.textContent = entry.name;
     dots.querySelectorAll('[role="radio"]').forEach((d) => d.setAttribute('aria-checked', String(d.dataset.param === entry.param)));
     paintSiding(block, entry, { color: entry.param, family: entry.family.toUpperCase() });
