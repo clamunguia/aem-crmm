@@ -86,7 +86,7 @@ Every block's JS starts with a comment describing its authoring structure and op
 | `author-bio` | Blog author name and bio |
 | `table-plain` | Plain data table |
 | `accordion-faq` | Expandable question / answer rows |
-| `product-configurator` | Product panel: image, name, intro, texture / colour pickers |
+| `product-configurator` | Product panel: image, name, intro, texture / colour pickers. The house and texture images are PNGs with transparent siding. The colour list comes from the `/colors` sheet (columns `Name`, `Color` as a hex value, `Param`). Picking a colour shows a chip, paints the siding with that colour and sets `?color=<Param>`, so the link opens with the same colour. To add or change a colour, edit the sheet; the product pages don't need republishing. The local copy is `content/colors.json`. |
 | `product-specs` | Spec accordion beside an install-resources sidebar |
 
 ### Built for pages not migrated yet
