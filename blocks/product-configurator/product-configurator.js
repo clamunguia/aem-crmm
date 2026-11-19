@@ -73,14 +73,16 @@ function applyColors(block, colors) {
     .find((g) => [...g.querySelectorAll('.product-configurator-choice[role="radio"]')].some(isColor));
   if (!group) return;
   const choices = [...group.querySelectorAll('.product-configurator-choice[role="radio"]')].filter(isColor);
+  // round colour dots with the name on hover, as on the source (same look as the Dream dots)
   choices.forEach((el) => {
     const { color } = colors.get(el.dataset.value.toLowerCase());
-    const chip = document.createElement('span');
-    chip.className = 'product-configurator-color';
-    chip.style.setProperty('--chip', color);
-    el.prepend(chip);
-    el.classList.add('product-configurator-choice-color');
+    el.className = 'product-configurator-dot';
+    el.setAttribute('aria-label', el.dataset.value);
+    el.style.setProperty('--chip', color);
+    el.querySelector('.product-configurator-choice-label').className = 'product-configurator-dot-name';
   });
+  const list = group.querySelector('.product-configurator-choices');
+  if (!list.querySelector('.product-configurator-choice')) list.className = 'product-configurator-dots';
   const entryOf = (el) => colors.get(el.dataset.value.toLowerCase());
   choices.forEach((el) => el.addEventListener('click', () => paintSiding(block, entryOf(el), { color: entryOf(el).param })));
   // first colour: the one in ?color=, else the preselected one
