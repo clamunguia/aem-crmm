@@ -1,0 +1,18 @@
+# Extra redirects for content/redirects.json, one per line: <old path> <new path>
+# Both the slash and no-slash forms of each old path are added. Lines starting with # are ignored.
+# A redirect is only written when its new path is a published page.
+
+# The source site already redirects these old paths (checked 2026-11-19)
+/all-about-james-hardie/sustainability-esg-initiatives/environment-sustainability /all-about-james-hardie/sustainability-esg-initiatives
+/all-about-james-hardie/sustainability-esg-initiatives/siding-solutions-through-innovation /all-about-james-hardie/sustainability-esg-initiatives
+/all-about-james-hardie/sustainability-esg-initiatives/sustainable-communities /all-about-james-hardie/sustainability-esg-initiatives
+/all-about-james-hardie/sustainability-esg-initiatives/zero-harm-safety-culture /all-about-james-hardie/sustainability-esg-initiatives
+/build-with-hardie/re-side-process /re-side-process
+/product-catalog/backer-board-products/hydro-defense-backer-board /product-catalog/backer-board-products/hardie-backer-cement-board
+/prosHub /pros-hub
+/statement-collection-essentials /hardie-trim-over-installation-method
+/term-conditions /terms-conditions
+
+# Blog categories linked from articles that do not exist on the source either (proposed)
+/blog/exterior-design /blog/explore-exterior-design
+/blog/home-siding-care /blog

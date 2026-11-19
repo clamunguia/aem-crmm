@@ -13,7 +13,8 @@
     "da:pull": "node tools/importer/da-sync/pull.mjs",
     "da:inventory": "node tools/importer/da-sync/inventory.mjs",
     "da:relink": "node tools/importer/da-sync/relink.mjs",
-    "da:clean": "node tools/importer/da-sync/clean.mjs"
+    "da:clean": "node tools/importer/da-sync/clean.mjs",
+    "da:redirects": "node tools/importer/da-sync/redirects.mjs"
   },
   "repository": {
     "type": "git",
