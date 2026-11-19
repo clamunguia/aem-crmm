@@ -129,6 +129,17 @@ export default async function decorate(block) {
         if (node !== subList) button.append(node);
       });
       navSection.prepend(button);
+      // groups: a dropdown item with a title and its own list ("The Hardie™ Difference" + links)
+      // is shown as a titled column (desktop) or a titled block (mobile)
+      const groups = [...subList.children].filter((li) => li.querySelector(':scope > ul'));
+      if (groups.length) {
+        subList.classList.add('nav-drop-groups');
+        groups.forEach((li) => {
+          li.classList.add('nav-group');
+          const title = [...li.children].find((c) => c.tagName !== 'UL');
+          if (title) title.classList.add('nav-group-title');
+        });
+      }
       button.addEventListener('click', () => {
         const expanded = button.getAttribute('aria-expanded') === 'true';
         if (isDesktop.matches) {
