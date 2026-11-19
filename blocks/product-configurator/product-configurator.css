@@ -317,6 +317,7 @@
  */
 .product-configurator .product-configurator-choice.product-configurator-choice-color {
   position: relative;
+  flex: none;
   box-sizing: border-box;
   width: 40px;
   min-width: 0;
