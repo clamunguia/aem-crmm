@@ -93,6 +93,7 @@ Every block's JS starts with a comment describing its authoring structure and op
 
 Texture choices link to their texture page (for example Hardie® Panel → `/…/hardie-panel-siding/stucco`). A click loads that page's configurator in place and updates the address, keeping `?color=`. That is how a Dream-only texture such as Stucco brings its own colours. On a texture page its own texture is marked as selected. |
 | `product-specs` | Spec accordion beside an install-resources sidebar |
+| `search-results` | Site search on `/search`. It reads the site index (`source | /query-index.json`, read in full) and leaves out `noindex` pages. Every word of `?q=` must match the title, description or path; title matches rank first ("Relevance" sort). Categories come from path rules (`category | /blog/ | Blog`, then `category-default`), with counts, and `?tab=<category>` preselects one. Options: `alt` (tech docs), `light` (products), `alt-2` (colour collections). The `/search` page has `robots: noindex`. |
 
 ### Built for pages not migrated yet
 
@@ -106,13 +107,12 @@ Texture choices link to their texture page (for example Hardie® Panel → `/…
 
 ### Integrations: need a backend service before they work
 
-These render the source site's UI, but the services behind them (search, dealer locator, lead forms, ZIP location) were **not migrated**.
+These render the source site's UI, but the services behind them (dealer locator, contractor finder, lead forms, ZIP location) were **not migrated**. See *Known gaps → Pages not migrated yet* for what each page depends on.
 
 | Block | Purpose |
 |---|---|
 | `form` | Lead-capture / contact form. Fields come from a form definition sheet (`<page>-form.json` next to the page, made with the forms importer) or from rows in the block; see `blocks/form/README.md`. First use: `/get-an-estimate` (`get-an-estimate-form.json`). **No endpoint is set yet**, so the form validates but sends nothing and says so. The source posts to Salesforce from its own page code; choose the destination (Salesforce Web-to-Lead, Marketo, or a forms service) and put its URL in the `submit` row's `Value`. |
 | `dealer-locator` | ZIP + radius dealer search |
-| `search-results` | Filterable search results |
 | `hero-search` | Contractor-finder hero |
 | `color-search` | Colour-name search field |
 | `location-indicator` | Visitor's ZIP with a "change location" action |
@@ -121,6 +121,8 @@ These render the source site's UI, but the services behind them (search, dealer 
 ### Infrastructure
 
 `header` and `footer` load the `nav` and `footer` pages as fragments. `fragment` embeds another page. `widget` is built from `/widgets/` links.
+
+The `nav` page holds the four menus of the source (Our Products, Help for Homeowners, Resources for Professionals, About James Hardie). In each menu, a sub-item whose first line is a plain title followed by a list of links ("By Siding Type" → Plank Lap Siding, Panel Siding…) is a **group**. Groups become the columns of the desktop dropdown, which sits against the menu bar; the last menu's dropdown is right-aligned. On mobile the menus are stacked and start open. A `/search` link in the tools part of the nav becomes the magnifier icon.
 
 ### Section styles
 
@@ -186,11 +188,13 @@ The site catalog (`catalog/`, local only) groups the 294 source pages into templ
 | Template | Import script | Pages | Migrated |
 |---|---|---|---|
 | `landing-photo-hero` | `tools/importer/import-landing-photo-hero.js` | 9 | 9 |
-| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 177 (blog articles and the article-style pages without forms) |
-| `product-catalog` | `tools/importer/import-product-catalog.js` | 75 | 71 (product pages and the blog section index pages) |
+| `article-split-intro` | `tools/importer/import-article-split-intro.js` | 185 | 176 (blog articles and the article-style pages without forms) |
+| `product-catalog` | `tools/importer/import-product-catalog.js` | 75 | 72 (product pages and the blog section index pages) |
 | `blog-home` | `tools/importer/import-blog-home.js` | 1 | 1 (`/blog`) |
 | `small-pages` | `tools/importer/import-small-pages.js` | 18 | 18 (the small templates' pages without forms) |
-| Pages with forms (Marketo, search, dealer locator) | not created yet | ~15 | 1 (`/get-an-estimate`, see the `form` block) |
+| Pages with forms or locators | not created yet | 18 | 0 live. `/get-an-estimate` is migrated in the workspace only (see the `form` block). |
+
+Live on 2026-11-24: **276 of the 294 catalog pages (94%)**. The 18 left are listed in *Known gaps*.
 
 `small-pages` covers the 18 pages without forms of the ten small catalog templates (legal pages, sitemap, FAQ, safety resources, Why James Hardie sub-pages and some landings). They have no import script of their own. This one uses each page's catalog block selectors (`pageInstances`) for blocks with a parser, plus the generic section rules of `landing-photo-hero`. Three rules from the other templates fix the catalog's labels: text cards in a `.cards-container` are `cards-feature`, an `<ol>` of figures is `columns-stats`, and a `hero-split` with no heading is a `quote`. Consecutive `accordion-faq` blocks are joined, so the FAQ has one accordion per category. The notes at the top of the script explain how its `PAGE_TEMPLATE` was built from the catalog; to add a page, build its entries the same way rather than writing selectors by hand.
 
@@ -257,14 +261,61 @@ Batch lists live in `migration-work/batches/` (local only). For example, `articl
 
 ## 7. Known gaps
 
-- **Not published yet:** the 35 migrated pages, the nav and the footer are on preview only. Live still serves the old portfolio home page, nav and footer until they are published.
-- **Remaining pages:** 260 source pages are not migrated yet: 162 articles, 72 catalog and product pages, and the 26 pages of the 12 smaller templates. Those templates need block mapping and import scripts before they can be imported.
-- **Integrations:** search, dealer locator, lead forms, chatbot and ZIP location are not migrated (see *Integrations* above). The "Do Not Sell My Personal Information" consent link is not in the footer either. The `announcement-bar` block exists but is not wired into the header.
-- **Links and documents:** links to pages that are not migrated yet still point to jameshardie.com. So do 2 PDFs linked from the footer's bottom bar: the California Supply Chain Transparency Act and the Canadian Forced Labour Report.
+Status on 2026-11-24: 276 of 294 catalog pages are live, and so are the nav, the footer, `/search`, the redirects sheet (298 rows) and the `/colors` sheet (705 colours).
+
+### Pages not migrated yet (18)
+
+They all depend on a service the source runs and that did not move to EDS.
+
+**Marketo forms (15 pages).** All forms come from one Marketo instance (`966-NNK-991`, forms served from `lp-new.jameshardie.com`). Hidden fields carry UTM source, the GA client id and the Amplitude device id, named like Salesforce fields (`GACLIENTID__c`), so Marketo syncs these leads to Salesforce.
+
+| Page | Purpose | Marketo form | reCAPTCHA |
+|---|---|---|---|
+| `/contact-james-hardie` | General contact | 1955 | yes |
+| `/all-about-james-hardie/media-resources` | Logos, media kit and contact | 1955 | yes |
+| `/media-inquiry` | Press inquiries | 1957 | yes |
+| `/request-for-inspiration` | Design brochure download | 1957 | yes |
+| `/request-james-hardie-catalog` | Product catalog download | 1957 | yes |
+| `/request-re-side-guide` | Re-side guide | 2190 | yes |
+| `/request-contractor-toolkit` | Contractor toolkit | 2167 | yes |
+| `/request-builder-toolkit` | Builder toolkit | 2168 | yes |
+| `/request-trim-over-toolkit` | Trim-Over™ kit, optional sales contact | 2574 | yes |
+| `/request-multifamily-contact` | Multi-Family representative | 2581 | yes |
+| `/request-timberhue-collection-catalog` | TimberHue™ catalog | 2469 | no |
+| `/request-texas-design-lookbook` | Texas design lookbook | 2404 | no |
+| `/hardiebacker-support` | Interior (HardieBacker) support | 2431 | no |
+| `/contractor-kit` | Kit for contractors' websites | 2437 | no |
+| `/sustainability-rating-request` | Project sustainability report | 2472 | no |
+
+Needed from the client: confirmation that these Marketo forms can be embedded on the new domain, and what each one gives after submitting (download or thank-you page). One form block can then serve all 15 pages, each naming its form id.
+
+**Salesforce (1 page).** `/get-an-estimate` connects the visitor with up to three local contractors. Its form (about 30 fields) posts Salesforce fields (`00N…`) through the source's own server, with two server-made tokens and reCAPTCHA. It is migrated in the workspace with its form definition, but has no endpoint. Needed: where the leads should go (Salesforce Web-to-Lead, a Marketo form like the other pages, or a forms service).
+
+**Locators (2 pages).**
+
+| Page | What it does | Depends on |
+|---|---|---|
+| `/find-a-contractor` | Contractors by project type and ZIP | jameshardie.com's own APIs (`/api/getIPLocation`, `/api/getZipFromGeocode`), its contractor network, Google Maps |
+| `/find-dealer-near-you` | Map of dealers and distributors by ZIP | Google Maps and James Hardie's dealer data |
+
+Needed: access to the contractor and dealer data (their API, or an export that can be loaded as a sheet) and a Google Maps key allowed on the new domain.
+
+### Other gaps
+
+- **Menu links to pages that are not live:** 9 nav links use their new EDS path and answer 404 until the page is published (agreed with the team): 7 of the pages above, plus `/request-siding-quote` and `/hardie-designer`, which are not in the catalog. Links in page content to pages not migrated yet still point to jameshardie.com.
+- **External links on purpose:** the footer links to other James Hardie sites (HardieLink, claims, investor relations, ALLIANCE…) and to 2 PDFs hosted outside the site: the California Supply Chain Transparency Act report and the Canadian Forced Labour report.
+- **French:** the source offers "Français (Canada)" through Weglot, a third-party service that translates in the browser at the same URL, with James Hardie's account. It is not migrated, and the team chose English only for now (2026-11-19). Options when it comes back: the Weglot script and switcher (the client must authorise the new domains in Weglot), or native `/fr-ca/` pages.
+- **Other integrations:** chatbot and ZIP location are not migrated, and the "Do Not Sell My Personal Information" consent link is not in the footer. The `announcement-bar` block exists but is not wired into the header.
+- **Before the domain switch:** a CDN rule that drops the trailing slash from any path (the redirects sheet only covers the paths it lists), and analytics plus cookie consent.
+- **Temporary CSS:** `product-configurator.css` has a block of rules for the markup of the previous version of the script (commented as such). It only helped browsers that still had that script cached on 2026-11-19, so it can be removed.
 
 ### Resolved
 
-- **Large videos (2026-11-17):** the 12 videos over 36 MB were compressed to 14–31 MB and now play from `shared-media/`. The tool was ffmpeg, two-pass H.264 aiming at about 32 MB, with `+faststart`. Videos up to about 90 s keep 1080p, and longer ones go to 720p. Muted background loops (`hero-video`) drop their audio track. Before/after sizes are in the `videos` tab of `library/inventory`. Use the same approach for any new video over 36 MB. On 2026-11-19, 10 more videos (44–184 MB, on the article-style pages) were compressed the same way to 31–32 MB. Three are too large to download and still play from the source: the Habitat for Humanity documentary (5.4 GB), the Alliance hype video (386 MB) and the Florida realtor guide video (336 MB).
+- **Large videos (2026-11-17):** the 12 videos over 36 MB were compressed to 14–31 MB and now play from `shared-media/`. The tool was ffmpeg, two-pass H.264 aiming at about 32 MB, with `+faststart`. Videos up to about 90 s keep 1080p, and longer ones go to 720p. Muted background loops (`hero-video`) drop their audio track. Before/after sizes are in the `videos` tab of `library/inventory`. Use the same approach for any new video over 36 MB. On 2026-11-19, 10 more videos (44–184 MB, on the article-style pages) were compressed the same way to 31–32 MB. The last three, which were too large for the download tool, were compressed the same way to 32–34 MB, and are self-hosted too: the Habitat for Humanity documentary (5.4 GB), the Alliance hype video (386 MB) and the Florida realtor guide video (336 MB). No page plays a video from jameshardie.com any more.
+- **Site search (2026-11-19):** `/search` with the `search-results` block over the site index, and a magnifier in the header.
+- **Redirects (2026-11-19):** 298 old URLs (with the trailing slash, mixed case, old paths) redirect to their EDS page.
+- **Menus (2026-11-19):** the four menus have all the source's groups and links.
+- **Product colours (2026-11-19):** the configurator paints the house with the chosen Statement or Dream Collection® colour, with families, search and `?color=` links, and texture choices switch in place.
 
 ---
 
