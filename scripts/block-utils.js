@@ -9,12 +9,16 @@ import { createOptimizedPicture } from './aem.js';
  * non-SVG images (migrated images keep absolute source URLs until upload).
  * @param {Element} root container to scan
  * @param {Array} breakpoints createOptimizedPicture breakpoints
+ * @param {boolean} eager true for the page's main (LCP) image when it is not in the first
+ *   section: loads at once with fetchpriority high instead of lazily
  */
-export function optimizeImages(root, breakpoints = [{ width: '750' }]) {
+export function optimizeImages(root, breakpoints = [{ width: '750' }], eager = false) {
   root.querySelectorAll('picture > img').forEach((img) => {
     const url = new URL(img.src, window.location.href);
     if (url.origin !== window.location.origin || /\.svg$/i.test(url.pathname)) return;
-    img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, breakpoints));
+    const picture = createOptimizedPicture(img.src, img.alt, eager, breakpoints);
+    if (eager) picture.querySelector('img').setAttribute('fetchpriority', 'high');
+    img.closest('picture').replaceWith(picture);
   });
 }
 

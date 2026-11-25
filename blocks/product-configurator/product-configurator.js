@@ -245,7 +245,8 @@ function applyDream(block, dream) {
   }
   showFamily();
   if (fromUrl) select(fromUrl);
-  else paintSiding(block, null);
+  // a ?color= that is not a Dream colour (kept from a Statement texture) is dropped
+  else paintSiding(block, null, params.get('color') ? { color: null } : null);
 }
 
 /** The product configurator of another page (its .plain.html), with media URLs made absolute. */
@@ -449,7 +450,9 @@ export default async function decorate(block) {
   panel.append(intro);
   if (groups.children.length) panel.append(groups);
   if (actions.textContent.trim()) panel.append(actions);
-  optimizeImages(preview, [{ media: '(min-width: 900px)', width: '1200' }, { width: '750' }]);
+  // the house is the page's LCP image but the block is not in the first section, so it is
+  // not covered by waitForFirstImage: load it at once, with high priority
+  optimizeImages(preview, [{ media: '(min-width: 900px)', width: '1200' }, { width: '750' }], true);
   optimizeImages(groups, [{ width: '200' }]);
   const children = [];
   if (preview.children.length) children.push(preview);
