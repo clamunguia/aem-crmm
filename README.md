@@ -38,12 +38,12 @@ curl http://localhost:3000/<path>.plain.html
 | `blocks/<name>/<name>.js` / `.css` | One folder per block. `decorate(block)` gets the authored table as nested `div`s. CSS is scoped to `.<name>`. |
 | `scripts/aem.js` | EDS core library. **Vendored: never edit.** |
 | `scripts/scripts.js` | Page decoration: auto-blocking, section metadata (`decorateSectionMetadata`), `/widgets/` links → `widget` block. |
-| `scripts/block-utils.js` | Shared helpers for blocks (slider, video, image optimisation). |
-| `styles/brand.css` | Design tokens: colors, fonts, sizes, layout widths. |
+| `scripts/block-utils.js` | Shared helpers for blocks (slider, video, image optimisation). `optimizeImages(root, breakpoints, eager)` loads images lazily by default; pass `eager = true` for a block whose image is the page's LCP but is not in the first section (as the `product-configurator` house), which also sets `fetchpriority="high"`. |
+| `styles/brand.css` | Design tokens: colors, fonts, sizes, layout widths. Linked from `head.html` (and `404.html`) before `styles.css`. Don't `@import` it from `styles.css`: the browser would only request it after `styles.css` arrives, a waiting step on every page. |
 | `styles/styles.css` | Global styles: typography, pill buttons, section styles. |
 | `styles/fonts.css` | Web fonts (currently system Helvetica Neue / Arial stack). |
 | `icons/*.svg` | 90 icons, mostly copied from `jameshardie.com/icons/` (names lowercased with hyphens). Authors insert them as `:name:`. The full list, with each icon's source URL, is in DA `library/inventory`, tab `icons`. `*-white` icons are meant for dark backgrounds. |
-| `head.html` | Tags added to every page `<head>`. |
+| `head.html` | Tags added to every page `<head>`. Keep it minimal: no third-party scripts (they go in `loadDelayed()`). |
 | `tools/importer/` | Migration tooling (not served, see `.hlxignore`). |
 | `.hlxignore` | Files that are committed but **not** served. Every other committed file is public. |
 

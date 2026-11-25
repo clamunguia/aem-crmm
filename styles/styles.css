@@ -1,4 +1,5 @@
-@import url('brand.css');
+/* Design tokens are in brand.css, linked before this file in head.html (no @import: it would
+   make the browser wait for styles.css before it even requests brand.css). */
 
 /*
  * Copyright 2020 Adobe. All rights reserved.
